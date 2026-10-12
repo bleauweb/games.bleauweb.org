@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>Gate Rush</title>
+  <meta name="description" content="Steer your squad through the right gates, shoot through the enemies, beat the boss. A lane runner you can actually win." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="stage" aria-label="Game view"></div>
+
+  <!-- Heads-up display -->
+  <div id="hud" class="layer hidden">
+    <div class="hud-row">
+      <div class="pill" id="hud-level">Level 1</div>
+      <div class="pill gold"><span class="coin-icon"></span><span id="hud-coins">0</span></div>
+      <button class="icon-btn" id="btn-pause" aria-label="Pause">❚❚</button>
+    </div>
+    <div id="hint" class="hint">Drag left or right to steer</div>
+  </div>
+
+  <!-- Title / level select / shop -->
+  <section id="screen-title" class="layer panel">
+    <div class="card">
+      <h1 class="logo">Gate <span>Rush</span></h1>
+      <p class="tagline">Pick the gates that grow your squad. Shoot through everything else. Beat the boss.</p>
+
+      <div class="level-pick">
+        <button class="icon-btn" id="lvl-prev" aria-label="Previous level">‹</button>
+        <div>
+          <div class="level-num">Level <span id="title-level">1</span></div>
+          <div class="stars" id="title-stars" aria-label="Best result"></div>
+        </div>
+        <button class="icon-btn" id="lvl-next" aria-label="Next level">›</button>
+      </div>
+
+      <button class="big" id="btn-play">Play</button>
+
+      <div class="wallet"><span class="coin-icon"></span><span id="title-coins">0</span> coins</div>
+      <div class="shop" id="shop"></div>
+
+      <details class="how">
+        <summary>How to play</summary>
+        <ul>
+          <li><b>Steer</b> by dragging anywhere (or use ← → / A D).</li>
+          <li><b>Gates</b> change your troop count. Green grows it, red shrinks it. Each gate shows what you would end up with.</li>
+          <li><b>Enemies</b> fire back once you are close. A bigger squad wins fights with fewer losses. Side groups can be dodged; walls cannot.</li>
+          <li><b>The boss</b> waits at the end. Arrive with as many troops as you can.</li>
+          <li><b>Coins</b> buy permanent upgrades. Every level is beatable without them.</li>
+        </ul>
+      </details>
+
+      <div class="foot">
+        <button class="link" id="btn-mute">Sound: on</button>
+        <a class="link" href="/">All games</a>
+        <button class="link danger" id="btn-reset">Reset progress</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- End of level -->
+  <section id="screen-end" class="layer panel hidden">
+    <div class="card">
+      <h2 id="end-title">Victory</h2>
+      <div class="stars big-stars" id="end-stars"></div>
+      <p id="end-text"></p>
+      <div class="rewards" id="end-rewards"></div>
+      <div class="row">
+        <button class="big" id="btn-next">Next level</button>
+        <button class="big ghost" id="btn-retry">Replay</button>
+      </div>
+      <button class="link" id="btn-menu">Back to menu</button>
+    </div>
+  </section>
+
+  <!-- Pause -->
+  <section id="screen-pause" class="layer panel hidden">
+    <div class="card small">
+      <h2>Paused</h2>
+      <button class="big" id="btn-resume">Resume</button>
+      <button class="link" id="btn-quit">Quit to menu</button>
+    </div>
+  </section>
+
+  <noscript><div class="layer panel"><div class="card"><p>Gate Rush needs JavaScript and WebGL.</p></div></div></noscript>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

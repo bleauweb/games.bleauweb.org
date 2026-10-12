@@ -1,0 +1,29 @@
+:root {
+  --bg: #0f1626;
+  --bg-2: #16213a;
+  --card: #1b2744;
+  --text: #e9eefb;
+  --muted: #9fb0d4;
+  --accent: #5aa0ff;
+  --gold: #ffc83d;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: inherit; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 32px 16px 64px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+header img { width: 44px; height: 44px; }
+header h1 { font-size: 1.5rem; margin: 0; }
+header p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.card { background: var(--card); border-radius: 16px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.06); transition: transform .12s ease, border-color .12s ease; }
+.card:hover, .card:focus-visible { transform: translateY(-2px); border-color: var(--accent); outline: none; }
+.card .art { aspect-ratio: 16 / 9; background: linear-gradient(135deg, #22335e, #0f1626); display: grid; place-items: center; }
+.card .art svg { width: 60%; height: 60%; }
+.card .body { padding: 14px 16px 18px; }
+.card h2 { margin: 0 0 6px; font-size: 1.15rem; }
+.card p { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; background: rgba(90,160,255,0.15); color: var(--accent); }
+footer { margin-top: 40px; color: var(--muted); font-size: 0.85rem; }
+footer a { color: var(--muted); }

@@ -1,0 +1,26 @@
+# DigitalOcean App Platform spec for games.bleauweb.org.
+#
+# First time: create the app from this file (App Platform > Create App > import spec, or
+# `doctl apps create --spec .do/app.yaml`). After that every push to `main` rebuilds and
+# redeploys it — no GitHub Action is needed for the deploy itself; CI only checks the build.
+#
+# It is a static site: Vite builds the hub and every game into dist/, which App Platform
+# serves from its CDN. Static sites are in App Platform's free tier (first three per account).
+name: games-bleauweb-org
+region: nyc
+static_sites:
+  - name: web
+    github:
+      repo: bleauweb/games.bleauweb.org
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    build_command: npm ci && npm run build
+    output_dir: dist
+    error_document: 404.html
+    source_dir: /
+# The custom domain. App Platform shows the CNAME target once the app exists; add it at the
+# DNS host for bleauweb.org. Until then the app is reachable at its *.ondigitalocean.app URL.
+domains:
+  - domain: games.bleauweb.org
+    type: PRIMARY

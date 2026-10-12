@@ -1,0 +1,22 @@
+{
+  "name": "games.bleauweb.org",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Small browser games by Bleauweb. Static site: a hub page plus one folder per game.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}

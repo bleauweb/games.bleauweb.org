@@ -1,0 +1,10 @@
+{
+  "name": "Gate Rush",
+  "short_name": "Gate Rush",
+  "start_url": "/games/gate-rush/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1626",
+  "theme_color": "#0f1626",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
