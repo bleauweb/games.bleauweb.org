@@ -1,0 +1,9 @@
+.pegs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.peg { background: var(--panel); border: 2px solid var(--line); border-radius: 16px; height: 260px; position: relative; display: flex; flex-direction: column-reverse; align-items: center; padding: 10px 6px 14px; gap: 4px; }
+.peg::before { content: ''; position: absolute; left: 50%; bottom: 14px; width: 6px; height: 215px; margin-left: -3px; background: var(--line); border-radius: 3px; }
+.peg.sel { border-color: var(--accent); }
+.peg.hint { border-color: var(--gold); }
+.disc { height: 22px; border-radius: 8px; position: relative; z-index: 1; }
+.disc.lifted { transform: translateY(-14px); box-shadow: 0 6px 12px rgba(0,0,0,0.25); }
+.peg .label { position: absolute; top: 6px; font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+.pegs.solved .peg { border-color: var(--good); }
