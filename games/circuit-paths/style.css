@@ -1,0 +1,7 @@
+.board-wrap { display: flex; justify-content: center; }
+.board { width: min(100%, 440px); aspect-ratio: 1; background: var(--panel); border-radius: 14px; touch-action: none; display: block; }
+.board .gridline { stroke: var(--line); stroke-width: 0.03; }
+.board .path { fill: none; stroke-width: 0.42; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+.board .fillcell { opacity: 0.18; }
+.board .dot { stroke: rgba(0,0,0,0.25); stroke-width: 0.04; }
+.board.solved { box-shadow: 0 0 0 4px var(--good); }
