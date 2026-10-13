@@ -1,0 +1,6 @@
+.items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.items.three { grid-template-columns: repeat(3, 1fr); }
+.item { border: 2px solid var(--line); background: var(--panel); border-radius: 18px; aspect-ratio: 1; display: grid; place-items: center; }
+.item svg { width: 78%; height: 78%; }
+.item.ok { border-color: var(--good); } .item.bad { border-color: var(--bad); }
+.item:disabled { cursor: default; }

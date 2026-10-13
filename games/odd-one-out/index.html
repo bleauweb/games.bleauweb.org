@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Odd One Out</title>
+  <meta name="description" content="A few items share a rule; one breaks it. Find the odd one. The shared rule is spelled out after every answer." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Odd <span>One</span> Out</h1>
+      <p class="tagline">A few items share something. One does not. Tap the odd one. Whatever happens, the shared rule is spelled out, so every round shows you what to look for.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="items" id="items"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="explain hidden" id="explain"></div>
+      <div class="chips" style="margin-top:8px"><button class="chip" id="btn-hint">Hint</button></div>
+      <button class="btn wide hidden" id="btn-next">Next</button>
+    </div>
+  </section>
+  <section id="screen-done" class="screen hidden">
+    <div class="center card">
+      <div class="tick">✓</div>
+      <h2 style="justify-content:center" id="done-title"></h2>
+      <p class="muted" id="done-text" style="text-align:center"></p>
+      <button class="btn wide" id="btn-again">Play this level again</button>
+      <button class="btn ghost wide" id="btn-levels">Back to levels</button>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

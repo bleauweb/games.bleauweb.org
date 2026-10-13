@@ -40,6 +40,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Pattern Weaver | `games/pattern-weaver/` | Sandbox, no failure state: paint on 8/16/24 grids with no mirror, ↔, ↕, four-way, turn×4 or kaleidoscope symmetry, repeating 4×4 or 8×8 tiles, flood fill, colour cycling, undo, a "surprise me" seed, a localStorage gallery and PNG download. Symmetry, tiling and fill helpers are tested. |
 
+| Odd One Out | `games/odd-one-out/` | Four to six items share one or two features; one breaks the rule. Generator rejects puzzles where another feature would single out a different item (tested), so there is always exactly one answer. Hint names the feature; the rule is explained after each answer. |
+
 ### Tools
 
 | Tool | Path | What it is |
