@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Market Day</title>
+  <meta name="description" content="Grow crops, raise animals, haul your goods to town and haggle with the market. Spend the profit on better equipment until you can afford the Golden Tractor." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="stat coins" id="t-coins"></div>
+    <div class="stat level" id="t-level"></div>
+    <div class="stat day" id="t-day"></div>
+  </header>
+  <div class="xpbar"><div id="xpfill"></div></div>
+  <main id="view"></main>
+  <nav class="tabs">
+    <button data-tab="farm" class="on">Farm</button>
+    <button data-tab="barn">Barn</button>
+    <button data-tab="market">Market</button>
+    <button data-tab="shop">Shop</button>
+  </nav>
+  <div id="sheet" class="sheet hidden"></div>
+  <div id="toasts"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -16,6 +16,7 @@ export default defineConfig({
         'treble-maker': page('games/treble-maker/index.html'),
         'note-by-note': page('games/note-by-note/index.html'),
         'flute-fingers': page('games/flute-fingers/index.html'),
+        'market-day': page('games/market-day/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },
