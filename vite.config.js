@@ -30,6 +30,7 @@ export default defineConfig({
         'rhythm-patterns': page('games/rhythm-patterns/index.html'),
         'circuit-paths': page('games/circuit-paths/index.html'),
         'tangram-fit': page('games/tangram-fit/index.html'),
+        'pattern-weaver': page('games/pattern-weaver/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },

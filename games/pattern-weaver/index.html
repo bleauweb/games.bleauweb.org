@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pattern Weaver</title>
+  <meta name="description" content="A calm sandbox for making patterns: paint on a grid with mirrors, four-way turns, kaleidoscope, repeating tiles and colour cycles. Save to a gallery or download a picture. No goals, no failing." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section class="screen">
+    <div class="center">
+      <div class="topbar">
+        <div class="top-mid"><div class="top-title">Pattern <span style="color:var(--accent)">Weaver</span></div><div class="top-sub">Paint with mirrors and repeats. There is nothing to get wrong here.</div></div>
+        <a class="icon-btn" href="/" aria-label="All games" style="text-decoration:none">⌂</a>
+      </div>
+      <div class="board-wrap"><canvas id="canvas" class="canvas"></canvas></div>
+      <div class="palette" id="palette"></div>
+      <div class="chips" style="margin-top:8px" id="mirrors"></div>
+      <div class="chips" style="margin-top:8px">
+        <button class="chip" id="tool-paint">Paint</button>
+        <button class="chip" id="tool-fill">Fill</button>
+        <button class="chip" id="tile">Repeat: off</button>
+        <button class="chip" id="size">16 × 16</button>
+      </div>
+      <div class="chips" style="margin-top:8px">
+        <button class="chip" id="undo">Undo</button>
+        <button class="chip" id="cycle">Cycle colours</button>
+        <button class="chip" id="seed">Surprise me</button>
+        <button class="chip" id="clear">Clear</button>
+      </div>
+      <div class="chips" style="margin-top:8px">
+        <button class="chip" id="save">Save to gallery</button>
+        <button class="chip" id="download">Download picture</button>
+      </div>
+      <h2>Gallery <span class="sub" id="gallery-count"></span></h2>
+      <div class="gallery" id="gallery"></div>
+      <div id="calm"></div>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

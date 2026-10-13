@@ -38,6 +38,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Tangram Fit | `games/tangram-fit/` | Grid "tangram": fill a connected silhouette exactly with 3–8 polyomino pieces (trominoes to pentominoes). Silhouettes are made by placing the pieces first, so they always fit; orientations (up to eight) are tested, and a tap places the selected piece in any orientation-fitting position covering the tapped square. |
 
+| Pattern Weaver | `games/pattern-weaver/` | Sandbox, no failure state: paint on 8/16/24 grids with no mirror, ↔, ↕, four-way, turn×4 or kaleidoscope symmetry, repeating 4×4 or 8×8 tiles, flood fill, colour cycling, undo, a "surprise me" seed, a localStorage gallery and PNG download. Symmetry, tiling and fill helpers are tested. |
+
 ### Tools
 
 | Tool | Path | What it is |
