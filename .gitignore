@@ -8,3 +8,7 @@ gameboy/common/*_tiles.c
 gameboy/common/*_tiles.h
 gameboy/games/*/tiles.c
 gameboy/games/*/tiles.h
+public/roms/*.noi
+public/roms/*.map
+gameboy/games/*/puzzles.h
+gameboy/games/*/puzzles.json

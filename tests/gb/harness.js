@@ -15,10 +15,15 @@ export function boot(slug, { frames = 150, sram } = {}) {
   const rom = fs.readFileSync(path.join(ROOT, 'public/roms', `${slug}.gb`));
   gb.loadRom(rom, sram);
   const core = gb[Object.keys(gb)[0]].gameboy;
+  let noi = null;
+  try { noi = fs.readFileSync(path.join(ROOT, 'public/roms', `${slug}.noi`), 'utf8'); } catch { /* no map */ }
   const g = {
+    // address of a C global from the linker map (static variables are not listed)
+    sym(name) { const m = noi && new RegExp(`DEF _${name} (?:0x)?([0-9A-Fa-f]+)`).exec(noi); if (!m) throw new Error(`no symbol ${name}`); return parseInt(m[1], 16); },
+    mem(addr, len = 1) { if (typeof addr === 'string') addr = g.sym(addr); return Array.from(core.memory.slice(addr, addr + len)); },
     gb, core, slug,
     frames(n) { for (let i = 0; i < n; i++) gb.doFrame(); return g; },
-    tap(key, { hold = 4, settle = 10 } = {}) {
+    tap(key, { hold = 4, settle = 20 } = {}) {
       for (let i = 0; i < hold; i++) { gb.pressKey(KEYS[key]); gb.doFrame(); }
       g.frames(settle); return g;
     },
@@ -35,6 +40,12 @@ export function boot(slug, { frames = 150, sram } = {}) {
       return out;
     },
     text() { return g.rows().join('\n'); },
+    // advance until the screen shows str (or a predicate holds); throws after max frames
+    until(what, max = 300) {
+      const ok = typeof what === 'function' ? what : () => g.has(what);
+      for (let i = 0; i < max; i++) { if (ok()) return g; gb.doFrame(); }
+      throw new Error(`timed out waiting for ${what}\n${g.text()}`);
+    },
     has(str) { return g.rows().some((r) => r.includes(str)); },
     find(str) { const i = g.rows().findIndex((r) => r.includes(str)); return i < 0 ? null : { y: i, x: g.rows()[i].indexOf(str) }; },
     sram() { return gb.getSaveData(); },
