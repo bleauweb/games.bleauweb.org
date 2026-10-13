@@ -1,4 +1,6 @@
 // Headless Game Boy harness around serverboy: boots a ROM from public/roms, presses keys,
+// Note: serverboy's doFrame() advances about half an LCD frame, so holds and settles below are in
+// those half-frames; a key must be held for 3 real frames to be sure the once-per-VBL joypad read sees it.
 // and reads the background tile map back as text (font tiles are char - 32).
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
@@ -23,7 +25,7 @@ export function boot(slug, { frames = 150, sram } = {}) {
     mem(addr, len = 1) { if (typeof addr === 'string') addr = g.sym(addr); return Array.from(core.memory.slice(addr, addr + len)); },
     gb, core, slug,
     frames(n) { for (let i = 0; i < n; i++) gb.doFrame(); return g; },
-    tap(key, { hold = 4, settle = 20 } = {}) {
+    tap(key, { hold = 6, settle = 20 } = {}) {
       for (let i = 0; i < hold; i++) { gb.pressKey(KEYS[key]); gb.doFrame(); }
       g.frames(settle); return g;
     },
