@@ -1,0 +1,10 @@
+.seq { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.term { width: 64px; height: 64px; border-radius: 14px; background: var(--panel-2); display: grid; place-items: center; font-weight: 900; font-size: 1.3rem; }
+.term.q { border: 2px dashed var(--accent); color: var(--accent); font-size: 1.6rem; }
+.term svg { width: 52px; height: 52px; }
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.opt { border: 2px solid var(--line); background: var(--panel); border-radius: 16px; min-height: 84px; display: grid; place-items: center; font-weight: 900; font-size: 1.4rem; }
+.opt svg { width: 60px; height: 60px; }
+.opt.ok { border-color: var(--good); } .opt.bad { border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+@media (min-width: 520px) { .term { width: 72px; height: 72px; } .options { grid-template-columns: repeat(4, 1fr); } }

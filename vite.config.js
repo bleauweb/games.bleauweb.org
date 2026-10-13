@@ -23,6 +23,7 @@ export default defineConfig({
         capitals: page('games/capitals/index.html'),
         'morse-ear': page('games/morse-ear/index.html'),
         forecaster: page('games/forecaster/index.html'),
+        'sequence-lab': page('games/sequence-lab/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },

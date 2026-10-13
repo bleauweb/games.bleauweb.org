@@ -17,6 +17,15 @@ game lives in its own folder under `games/` and is reachable at `/games/<name>/`
 | Treble Maker | `games/treble-maker/` | A note-reading trainer: notes on an SVG staff, answered on an on-screen piano. Learn (names and mnemonics on the staff), Practice (12 notes, pass at 80% to unlock the next level), Rush (notes scroll toward a line; three lives). Nine levels from treble lines to sharps and flats; missed notes come back more often. |
 | Gate Rush | `games/gate-rush/` | A WebGL lane runner in the style of the "pick the gate" mobile-game ads, except it is tuned so you can actually win. Three.js, touch and keyboard, saves progress in the browser. |
 
+### Pattern games
+
+Built around predictable rules, no timers, and completion. They share `shared/calm.css` and
+`shared/calm.js`: a sound / motion / calm-palette strip stored once for the whole hub.
+
+| Game | Path | What it is |
+| --- | --- | --- |
+| Sequence Lab | `games/sequence-lab/` | What comes next: number rules (steps, multiples, alternating gaps, squares, triangles, sums) and shape rules (shape, colour, size, rotation cycling, up to three at once). Four options, the rule explained after each answer. Generator tested for valid, distinct options across every level. |
+
 ### Tools
 
 | Tool | Path | What it is |

@@ -1,0 +1,58 @@
+/* Shared base for the pattern games: calm palette switch, motion switch, common layout. */
+:root {
+  --bg: #0f1626; --panel: #16213a; --panel-2: #1b2744; --text: #e9eefb; --muted: #9fb0d4;
+  --accent: #5aa0ff; --good: #3ddc84; --bad: #ff5c5c; --gold: #ffc83d; --line: rgba(255,255,255,0.08);
+  --sat: env(safe-area-inset-top, 0px); --sab: env(safe-area-inset-bottom, 0px);
+}
+html[data-theme="calm"] {
+  --bg: #f4f1ea; --panel: #ffffff; --panel-2: #efe9dd; --text: #2b2a33; --muted: #6b6a78;
+  --accent: #3b6ea8; --good: #2e8b57; --bad: #b9473f; --gold: #b07d1a; --line: rgba(0,0,0,0.08);
+}
+html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after { animation: none !important; transition: none !important; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body { display: flex; flex-direction: column; position: fixed; inset: 0; user-select: none; -webkit-user-select: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); } .small { font-size: 0.85rem; }
+.screen { flex: 1; overflow: auto; padding: calc(12px + var(--sat)) 12px calc(16px + var(--sab)); }
+.card { background: var(--panel); border-radius: 18px; padding: 16px; border: 1px solid var(--line); }
+.center { max-width: 560px; margin: 0 auto; }
+h1.logo { margin: 0 0 6px; font-size: 2rem; letter-spacing: -0.02em; }
+h1.logo span { color: var(--accent); }
+.tagline { color: var(--muted); margin: 0 0 14px; }
+h2 { font-size: 1.05rem; margin: 14px 0 8px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+h2 .sub { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+.btn { border: 0; border-radius: 12px; padding: 12px 16px; background: var(--accent); color: #fff; font-weight: 800; }
+html[data-theme="calm"] .btn { color: #fff; }
+.btn.ghost { background: var(--panel-2); color: var(--text); }
+.btn.good { background: var(--good); }
+.btn.small { padding: 7px 11px; font-size: 0.88rem; border-radius: 10px; }
+.btn:disabled { opacity: 0.45; cursor: default; }
+.wide { width: 100%; margin-top: 8px; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.levels { display: grid; gap: 8px; }
+.level { display: flex; align-items: center; gap: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; text-align: left; width: 100%; }
+.level .name { font-weight: 800; }
+.level .meta { color: var(--muted); font-size: 0.85rem; }
+.level .done { margin-left: auto; color: var(--good); font-weight: 900; }
+.level .prog { margin-left: auto; color: var(--muted); font-size: 0.85rem; font-weight: 700; }
+.topbar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--panel-2); color: var(--text); font-size: 18px; display: grid; place-items: center; flex: none; }
+.top-mid { flex: 1; min-width: 0; }
+.top-title { font-weight: 800; }
+.top-sub { color: var(--muted); font-size: 0.85rem; }
+.top-right { font-weight: 800; white-space: nowrap; }
+.feedback { text-align: center; min-height: 1.5em; font-weight: 800; margin: 8px 0; }
+.feedback.ok { color: var(--good); } .feedback.bad { color: var(--bad); } .feedback.hint { color: var(--gold); }
+.explain { background: var(--panel-2); border-radius: 12px; padding: 10px 12px; color: var(--text); font-size: 0.95rem; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.chip { border: 1px solid var(--line); background: var(--panel-2); border-radius: 999px; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; }
+.chip.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.calm { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; justify-content: center; margin-top: 14px; }
+.calm .chip { font-size: 0.8rem; padding: 6px 10px; }
+.foot { display: flex; justify-content: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.link { background: none; border: 0; padding: 6px; color: var(--muted); text-decoration: underline; font-size: 0.9rem; }
+.tick { font-size: 3rem; text-align: center; color: var(--good); }
+@keyframes pop { 0% { transform: scale(0.85); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+.pop { animation: pop .3s ease-out; }
