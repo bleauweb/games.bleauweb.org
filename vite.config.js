@@ -29,6 +29,7 @@ export default defineConfig({
         'sort-and-stack': page('games/sort-and-stack/index.html'),
         'rhythm-patterns': page('games/rhythm-patterns/index.html'),
         'circuit-paths': page('games/circuit-paths/index.html'),
+        'tangram-fit': page('games/tangram-fit/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },
