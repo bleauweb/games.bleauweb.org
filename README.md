@@ -91,7 +91,10 @@ Node 20 or newer. There is no backend: everything is static files built by Vite.
 
 `index.html` lists every game and tool by section. `shared/hub.js` adds a search box, section and
 tag filters, sorting (suggested, A–Z, recently played, most played, favourites first) and a
-favourite heart on each card. Choices and favourites live in `localStorage` under
+favourite heart on each card, folded into a "Find a game" panel that opens itself when a filter is
+active. A Continue row lists recently played games, a Compact cards switch hides the artwork, and the
+calm settings strip (sound, motion, calm colours, larger text) sits at the top and applies to every
+game. Choices and favourites live in `localStorage` under
 `bleauweb.hub.v1`, next to the play counts every page records on open (in `shared/pwa.js`), so
 nothing leaves the browser and it all works offline.
 

@@ -12,6 +12,10 @@
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
   <script type="module" src="/shared/pwa.js"></script>
   <script type="module" src="/shared/hub.js"></script>
+  <script type="module">
+    import { calmControls } from '/shared/calm.js';
+    calmControls(document.getElementById('calm'));
+  </script>
 </head>
 <body>
   <div class="wrap">
@@ -19,11 +23,24 @@
       <img src="/favicon.svg" alt="" />
       <div>
         <h1>Bleauweb Games</h1>
-        <p>Small games and handy tools we made for fun. Open one and play. Nothing to install, nothing to buy.</p>
+        <p class="intro">Games and tools, free, with no ads and no sign-up. Each one works offline once opened. Your progress stays in this browser.</p>
       </div>
     </header>
 
-    <div id="hub-tools" class="hub-tools"></div>
+    <div id="calm" aria-label="Display and sound settings"></div>
+
+    <div class="steps" aria-label="How this page works">
+      <div class="step"><b>1. Pick a game</b>Tap a card. Every game explains itself on its first screen.</div>
+      <div class="step"><b>2. Come back any time</b>Your recently played games appear below under Continue.</div>
+      <div class="step"><b>3. Make it yours</b>The ♡ on a card marks a favourite. Settings above apply everywhere.</div>
+    </div>
+
+    <div id="hub-recent" class="recent hidden"></div>
+
+    <details class="find" id="hub-find">
+      <summary><span>Find a game</span><span class="active" id="hub-active"></span></summary>
+      <div id="hub-tools" class="hub-tools"></div>
+    </details>
     <div id="hub-empty" class="card hidden" style="padding:16px;text-align:center">Nothing matches. Clear the filters to see everything again.</div>
 
     <h2 class="section">Games</h2>

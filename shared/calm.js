@@ -3,7 +3,7 @@
 const KEY = 'bleauweb.calm.v1';
 
 export function loadCalm() {
-  const d = { sound: true, motion: true, theme: 'dark' };
+  const d = { sound: true, motion: true, theme: 'dark', text: 'normal' };
   try {
     return { ...d, ...JSON.parse(localStorage.getItem(KEY) || '{}') };
   } catch {
@@ -22,6 +22,7 @@ export function saveCalm(c) {
 export function applyCalm(c) {
   document.documentElement.dataset.theme = c.theme;
   document.documentElement.dataset.motion = c.motion ? 'on' : 'off';
+  document.documentElement.dataset.text = c.text || 'normal';
 }
 
 /** Render the three switches into `el`; calls onChange(calm) after every change. */
@@ -34,13 +35,15 @@ export function calmControls(el, onChange) {
       <span class="muted small">Settings:</span>
       <button class="chip ${calm.sound ? 'on' : ''}" data-k="sound">Sound ${calm.sound ? 'on' : 'off'}</button>
       <button class="chip ${calm.motion ? 'on' : ''}" data-k="motion">Motion ${calm.motion ? 'on' : 'off'}</button>
-      <button class="chip ${calm.theme === 'calm' ? 'on' : ''}" data-k="theme">${calm.theme === 'calm' ? 'Calm colours' : 'Dark colours'}</button>`;
+      <button class="chip ${calm.theme === 'calm' ? 'on' : ''}" data-k="theme">${calm.theme === 'calm' ? 'Calm colours' : 'Dark colours'}</button>
+      <button class="chip ${calm.text === 'large' ? 'on' : ''}" data-k="text">${calm.text === 'large' ? 'Larger text' : 'Normal text'}</button>`;
   };
   el.addEventListener('click', (e) => {
     const b = e.target.closest('[data-k]');
     if (!b) return;
     const k = b.dataset.k;
     if (k === 'theme') calm.theme = calm.theme === 'calm' ? 'dark' : 'calm';
+    else if (k === 'text') calm.text = calm.text === 'large' ? 'normal' : 'large';
     else calm[k] = !calm[k];
     saveCalm(calm);
     applyCalm(calm);

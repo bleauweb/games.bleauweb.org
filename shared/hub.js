@@ -4,7 +4,7 @@ const KEY = 'bleauweb.hub.v1';
 const SORTS = { default: 'Suggested order', az: 'A to Z', recent: 'Recently played', most: 'Most played', favs: 'Favourites first' };
 
 function load() {
-  try { return { plays: {}, favs: [], tags: [], section: 'all', sort: 'default', q: '', ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { plays: {}, favs: [], tags: [], section: 'all', sort: 'default', q: '' }; }
+  try { return { plays: {}, favs: [], tags: [], section: 'all', sort: 'default', q: '', compact: false, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { plays: {}, favs: [], tags: [], section: 'all', sort: 'default', q: '', compact: false }; }
 }
 function save(state) { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ } }
 
@@ -23,6 +23,7 @@ sections.forEach((sec) => {
     fav.type = 'button';
     fav.title = 'Favourite';
     fav.setAttribute('aria-label', 'Favourite');
+    fav.setAttribute('aria-pressed', 'false');
     fav.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -51,6 +52,7 @@ function renderBar() {
       <button class="hchip ${state.section === 'all' ? 'on' : ''}" data-section="all">All</button>
       ${sections.map((s) => `<button class="hchip ${state.section === s.id ? 'on' : ''}" data-section="${s.id}">${s.name}</button>`).join('')}
       <button class="hchip ${state.section === 'favs' ? 'on' : ''}" data-section="favs">♥ Favourites</button>
+      <button class="hchip ${state.compact ? 'on' : ''}" data-compact="1">${state.compact ? 'Compact cards' : 'Full cards'}</button>
     </div>
     <div class="hub-row chips" id="hub-tags">
       ${allTags.filter((t, i) => moreTags || i < TOP_TAGS || state.tags.includes(t)).map((t) => `<button class="hchip tagchip ${state.tags.includes(t) ? 'on' : ''}" data-tag="${t}">${t}</button>`).join('')}
@@ -66,6 +68,7 @@ bar.addEventListener('click', (e) => {
   else if (b.dataset.tag) { const i = state.tags.indexOf(b.dataset.tag); if (i >= 0) state.tags.splice(i, 1); else state.tags.push(b.dataset.tag); }
   else if (b.dataset.clear) { state.tags = []; state.q = ''; state.section = 'all'; }
   else if (b.dataset.more) moreTags = !moreTags;
+  else if (b.dataset.compact) state.compact = !state.compact;
   save(state);
   renderBar();
   apply();
@@ -101,14 +104,38 @@ function cmp(a, b) {
   for (let i = 0; i < ka.length; i++) if (ka[i] !== kb[i]) return ka[i] < kb[i] ? -1 : 1;
   return 0;
 }
+function renderRecent() {
+  const box = document.getElementById('hub-recent');
+  if (!box) return;
+  const recent = cards.filter((c) => state.plays[c.slug]).sort((a, b) => state.plays[b.slug].last - state.plays[a.slug].last).slice(0, 4);
+  box.classList.toggle('hidden', recent.length === 0);
+  if (!recent.length) return;
+  box.innerHTML = `<h2 class="section" style="margin-top:0">Continue</h2><div class="recent-row">${recent.map((c) => `<a href="${c.el.getAttribute('href')}">${c.title}<small>played ${state.plays[c.slug].count}×</small></a>`).join('')}</div>`;
+}
+function describeFilters() {
+  const parts = [];
+  if (state.q) parts.push(`“${state.q}”`);
+  if (state.section !== 'all') parts.push(state.section === 'favs' ? 'favourites' : sections.find((s) => s.id === state.section)?.name.toLowerCase());
+  if (state.tags.length) parts.push(state.tags.join(', '));
+  if (state.sort !== 'default') parts.push(SORTS[state.sort].toLowerCase());
+  const el = document.getElementById('hub-active');
+  if (el) el.textContent = parts.length ? parts.join(' · ') : '';
+  const details = document.getElementById('hub-find');
+  if (details && parts.length && !details.open) details.open = true;
+}
 function apply() {
+  document.body.classList.toggle('compact', !!state.compact);
+  renderRecent();
+  describeFilters();
   let shown = 0;
   for (const sec of sections) {
     const mine = cards.filter((c) => c.section === sec);
     const vis = mine.filter(visible).sort(cmp);
     sec.grid.innerHTML = '';
     for (const c of vis) {
-      c.el.querySelector('.fav').classList.toggle('on', state.favs.includes(c.slug));
+      const favEl = c.el.querySelector('.fav');
+      favEl.classList.toggle('on', state.favs.includes(c.slug));
+      favEl.setAttribute('aria-pressed', state.favs.includes(c.slug) ? 'true' : 'false');
       const p = state.plays[c.slug];
       let badge = c.el.querySelector('.played');
       if (!badge) { badge = document.createElement('span'); badge.className = 'played'; c.el.querySelector('.tags').append(badge); }

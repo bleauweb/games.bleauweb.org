@@ -9,6 +9,7 @@ html[data-theme="calm"] {
   --accent: #3b6ea8; --good: #2e8b57; --bad: #b9473f; --gold: #b07d1a; --line: rgba(0,0,0,0.08);
 }
 html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after { animation: none !important; transition: none !important; }
+html[data-text="large"] { font-size: 18.5px; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 body { display: flex; flex-direction: column; position: fixed; inset: 0; user-select: none; -webkit-user-select: none; }
