@@ -28,3 +28,21 @@ header p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 .tag { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; background: rgba(90,160,255,0.15); color: var(--accent); }
 footer { margin-top: 40px; color: var(--muted); font-size: 0.85rem; }
 footer a { color: var(--muted); }
+
+/* Hub tools: search, filters, sort, favourites */
+.hub-tools { display: grid; gap: 8px; margin-bottom: 6px; }
+.hub-row { display: flex; gap: 8px; align-items: center; }
+.hub-row.chips { flex-wrap: wrap; gap: 6px; }
+.hub-q { flex: 1; min-width: 0; font: inherit; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: var(--card); color: var(--text); }
+.hub-sel { font: inherit; padding: 10px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: var(--card); color: var(--text); }
+.hchip { border: 1px solid rgba(255,255,255,0.12); background: var(--card); color: var(--muted); border-radius: 999px; padding: 6px 11px; font: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+.hchip.on { background: rgba(90,160,255,0.2); border-color: var(--accent); color: #cfe3ff; }
+.hchip.clear { color: var(--gold); }
+.hub-count { font-size: 0.85rem; }
+.hidden { display: none !important; }
+.card { position: relative; }
+.fav { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(0,0,0,0.45); color: #fff; font-size: 18px; cursor: pointer; display: grid; place-items: center; }
+.fav::before { content: '♡'; }
+.fav.on::before { content: '♥'; color: #ff7a9a; }
+.played { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,0.08); color: var(--muted); }
+.played:empty { display: none; }

@@ -87,6 +87,14 @@ Node 20 or newer. There is no backend: everything is static files built by Vite.
 2. Add the page to `rollupOptions.input` in `vite.config.js`.
 3. Add a card to `index.html`.
 
+## The hub
+
+`index.html` lists every game and tool by section. `shared/hub.js` adds a search box, section and
+tag filters, sorting (suggested, A–Z, recently played, most played, favourites first) and a
+favourite heart on each card. Choices and favourites live in `localStorage` under
+`bleauweb.hub.v1`, next to the play counts every page records on open (in `shared/pwa.js`), so
+nothing leaves the browser and it all works offline.
+
 ## Offline (PWA)
 
 The whole suite is an installable web app that works without a connection once visited:

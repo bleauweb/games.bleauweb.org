@@ -11,6 +11,7 @@
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
   <script type="module" src="/shared/pwa.js"></script>
+  <script type="module" src="/shared/hub.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -21,6 +22,9 @@
         <p>Small games and handy tools we made for fun. Open one and play. Nothing to install, nothing to buy.</p>
       </div>
     </header>
+
+    <div id="hub-tools" class="hub-tools"></div>
+    <div id="hub-empty" class="card hidden" style="padding:16px;text-align:center">Nothing matches. Clear the filters to see everything again.</div>
 
     <h2 class="section">Games</h2>
     <main class="grid">
