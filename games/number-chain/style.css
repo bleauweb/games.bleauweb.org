@@ -1,0 +1,8 @@
+.board-wrap { display: flex; justify-content: center; }
+.board { display: grid; gap: 4px; }
+.cell { width: var(--cell); height: var(--cell); border-radius: 10px; border: 2px solid var(--line); background: var(--panel); font-weight: 800; font-size: calc(var(--cell) * 0.38); display: grid; place-items: center; }
+.cell.given { background: var(--panel-2); color: var(--text); }
+.cell.filled { color: var(--accent); }
+.cell.sel { border-color: var(--accent); }
+.cell.wrong { border-color: var(--bad); }
+.board.solved .cell { border-color: var(--good); }

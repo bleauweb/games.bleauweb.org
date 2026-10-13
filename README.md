@@ -50,6 +50,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Pairs | `games/pairs/` | Memory pairs, 6–30 cards, with shape-only and colour-only variants. Mismatches turn back after a moment or on the next tap (toggle). Deck generation tested: exactly two of every key, variants differ in the non-matching attribute, perfect play finishes in one turn per pair. |
 
+| Number Chain | `games/number-chain/` | Hidato-style: a Hamiltonian snake fills the grid; givens are thinned while a counting solver confirms exactly one solution (tested for 4×4–7×7). Tap a number then the squares after it to count up or down; conflicts are refused; Check outlines misplaced numbers. |
+
 ### Tools
 
 | Tool | Path | What it is |

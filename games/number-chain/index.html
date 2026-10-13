@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Number Chain</title>
+  <meta name="description" content="A chain of numbers snakes through the grid, each one next to the one before. Some are given; fill in the rest. Every puzzle has exactly one answer." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <script type="module" src="/shared/pwa.js"></script>
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Number <span>Chain</span></h1>
+      <p class="tagline">The numbers 1 to the last snake through the grid, each one sitting next to the one before, up, down, left or right. Some are given. Tap a number, then tap the empty squares that follow it to count along. Every puzzle has exactly one answer.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="board-wrap"><div class="board" id="board"></div></div>
+      <div class="chips" style="margin-top:10px">
+        <button class="chip on" id="dir-up">Counting up</button>
+        <button class="chip" id="dir-down">Counting down</button>
+        <button class="chip" id="btn-check">Check</button>
+        <button class="chip" id="btn-new">New puzzle</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <p class="muted small" style="text-align:center">Tap a filled square to clear it. Givens cannot change.</p>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
