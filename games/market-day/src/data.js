@@ -59,7 +59,7 @@ export const UPGRADES = {
     levels: [
       { name: 'Seed drill', cost: 200, level: 2, desc: 'Plant every empty plot with one tap' },
       { name: 'Harvester', cost: 900, level: 4, desc: 'Harvest every ripe plot with one tap' },
-      { name: 'Tractor', cost: 3000, level: 5, desc: 'Harvesting replants the same crop for free' },
+      { name: 'Tractor', cost: 3000, level: 5, desc: '“Harvest all” replants the same crops for free' },
     ],
   },
   cart: {

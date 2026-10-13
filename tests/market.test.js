@@ -118,3 +118,22 @@ test('upgrade tables are consistent', () => {
   E.buyUpgrade(s, 'tools');
   assert.equal(E.plantAll(s, 'wheat'), 9);
 });
+
+test('the tractor replants only on harvest all; a single harvest leaves the plot free', () => {
+  const s = E.newGame(0, 1);
+  s.coins = 1e6;
+  s.xp = 1e6;
+  E.buyUpgrade(s, 'tools');
+  E.buyUpgrade(s, 'tools');
+  E.buyUpgrade(s, 'tools');
+  E.plant(s, 0, 'wheat');
+  E.plant(s, 1, 'carrot');
+  s.plots[0].progress = 1;
+  s.plots[1].progress = 1;
+  assert.equal(E.harvest(s, 0), 'wheat');
+  assert.equal(s.plots[0].crop, null, 'single harvest must not replant');
+  assert.ok(E.plant(s, 0, 'carrot'), 'the plot can take a different seed');
+  assert.equal(E.harvestAll(s), 1);
+  assert.equal(s.plots[1].crop, 'carrot', 'harvest all replants with the tractor');
+  assert.equal(s.plots[1].progress, 0);
+});

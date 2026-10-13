@@ -104,7 +104,7 @@ function renderFarm() {
   });
   html += '</div><div class="tools">';
   if (E.hasTool(state, 1)) html += `<button class="btn ghost small" data-act="plantall">Plant all: ${CROPS[lastCrop].name} (${CROPS[lastCrop].seed}¢ each)</button>`;
-  if (E.hasTool(state, 2)) html += `<button class="btn small" data-act="harvestall" ${ripe ? '' : 'disabled'}>Harvest all (${ripe})</button>`;
+  if (E.hasTool(state, 2)) html += `<button class="btn small" data-act="harvestall" ${ripe ? '' : 'disabled'}>Harvest all (${ripe})${E.hasTool(state, 3) ? ' & replant' : ''}</button>`;
   html += '</div>';
   html += `<h2>Diary</h2><div class="card diary">${state.log.slice(0, 6).map((l) => `<div><b>Day ${l.day}</b>${l.text}</div>`).join('') || '<div class="muted">Nothing yet. Plant something!</div>'}</div>`;
   return html;
@@ -291,7 +291,7 @@ $('view').addEventListener('click', (e) => {
   if (d.fulfil) return after(() => { const o = state.orders.find((x) => x.id === d.fulfil); if (E.fulfil(state, d.fulfil)) toast(`Delivered! +${o.pay}¢`, 'gold'); });
   if (d.buy) return after(() => { const next = E.nextUpgrade(state, d.buy); if (E.buyUpgrade(state, d.buy)) toast(next.win ? 'The Golden Tractor is yours!' : `Bought ${next.name}`, 'gold'); });
   if (d.act === 'plantall') return after(() => { const n = E.plantAll(state, lastCrop); toast(n ? `Planted ${n} ${CROPS[lastCrop].name.toLowerCase()}` : 'Nothing to plant (no coins or no empty plots)'); });
-  if (d.act === 'harvestall') return after(() => { const n = E.harvestAll(state); toast(`Harvested ${n}`); });
+  if (d.act === 'harvestall') return after(() => { const n = E.harvestAll(state); toast(E.hasTool(state, 3) ? `Harvested ${n} and replanted` : `Harvested ${n}`); });
   if (d.act === 'collectall') return after(() => { const n = E.collectAll(state); toast(`Collected ${n}`); });
   if (d.act === 'loadbest') return after(() => E.loadBest(state));
   if (d.act === 'sell') return goToTown();

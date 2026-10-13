@@ -271,19 +271,26 @@ export function harvest(state, index) {
   gainXp(state, CROPS[crop].price / 4);
   p.crop = null;
   p.progress = 0;
-  if (hasTool(state, 3)) {
-    // The tractor replants for free.
-    p.crop = crop;
-    p.progress = 0;
-  }
   return crop;
 }
 
+/** With the tractor, "harvest all" also replants each plot with the same crop, for free.
+ *  A single tap on a plot never replants, so you can always switch what grows there. */
 export function harvestAll(state) {
   if (!hasTool(state, 2)) return 0;
+  const replant = hasTool(state, 3);
   let n = 0;
   state.plots.forEach((p, i) => {
-    if (p.crop && p.progress >= 1 && harvest(state, i)) n++;
+    if (p.crop && p.progress >= 1) {
+      const crop = harvest(state, i);
+      if (crop) {
+        n++;
+        if (replant) {
+          p.crop = crop;
+          p.progress = 0;
+        }
+      }
+    }
   });
   return n;
 }
