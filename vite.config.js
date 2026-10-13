@@ -14,6 +14,7 @@ export default defineConfig({
         notFound: page('404.html'),
         'gate-rush': page('games/gate-rush/index.html'),
         'treble-maker': page('games/treble-maker/index.html'),
+        'note-by-note': page('games/note-by-note/index.html'),
       },
     },
   },

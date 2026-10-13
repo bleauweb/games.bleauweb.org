@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Note by Note</title>
+  <meta name="description" content="Learn to play real songs by reading them. Twenty public-domain melodies: listen, step through with hints, then play along in tempo." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Song list -->
+  <section id="screen-title" class="screen">
+    <div class="card">
+      <h1 class="logo">Note <span>by</span> Note</h1>
+      <p class="tagline">Learn real songs by reading them. Listen first, step through at your own pace, then play along in time.</p>
+      <div id="songs"></div>
+      <div class="foot">
+        <button class="link" id="btn-mute">Sound: on</button>
+        <button class="link" id="btn-key-labels">Key names: on</button>
+        <a class="link" href="/">All games</a>
+        <button class="link danger" id="btn-reset">Reset progress</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Play (listen / learn / play) -->
+  <section id="screen-play" class="screen play hidden">
+    <div class="topbar">
+      <button class="icon-btn" id="btn-close" aria-label="Close">✕</button>
+      <div class="top-mid">
+        <div class="top-title" id="play-title"></div>
+        <div class="top-sub" id="play-sub"></div>
+      </div>
+      <div class="top-right" id="play-right"></div>
+    </div>
+    <div class="score-card">
+      <svg id="score" role="img" aria-label="Music score"></svg>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="controls" id="controls"></div>
+    <div class="spacer"></div>
+    <div id="piano"></div>
+  </section>
+
+  <!-- Results -->
+  <section id="screen-results" class="screen hidden">
+    <div class="card">
+      <h2 id="res-title"></h2>
+      <div class="stars big-stars" id="res-stars"></div>
+      <p id="res-text"></p>
+      <div class="row">
+        <button class="big" id="btn-again">Again</button>
+        <button class="big ghost" id="btn-res-songs">Songs</button>
+      </div>
+      <button class="big gold-btn hidden" id="btn-res-next">Now play it in time</button>
+    </div>
+  </section>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

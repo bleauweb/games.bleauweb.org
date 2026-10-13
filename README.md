@@ -5,6 +5,7 @@ game lives in its own folder under `games/` and is reachable at `/games/<name>/`
 
 | Game | Path | What it is |
 | --- | --- | --- |
+| Note by Note | `games/note-by-note/` | Learn public-domain songs by reading them. Twenty melodies on a scrolling SVG staff (bar lines, note values, rests), answered on the on-screen piano. Listen / Learn (step through, hints after a wrong key, phrase practice) / Play (count-in, metronome, timing windows, accuracy and stars). Songs are text with bar lines; a test checks every bar adds up to the time signature. Shares its music model, piano and synth with Treble Maker. |
 | Treble Maker | `games/treble-maker/` | A note-reading trainer: notes on an SVG staff, answered on an on-screen piano. Learn (names and mnemonics on the staff), Practice (12 notes, pass at 80% to unlock the next level), Rush (notes scroll toward a line; three lives). Nine levels from treble lines to sharps and flats; missed notes come back more often. |
 | Gate Rush | `games/gate-rush/` | A WebGL lane runner in the style of the "pick the gate" mobile-game ads, except it is tuned so you can actually win. Three.js, touch and keyboard, saves progress in the browser. |
 
