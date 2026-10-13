@@ -1,0 +1,14 @@
+.board-wrap { display: flex; justify-content: center; }
+.board { display: grid; gap: 3px; background: var(--line); padding: 3px; border-radius: 10px; touch-action: manipulation; position: relative; }
+.cell { width: var(--cell); height: var(--cell); background: var(--panel); border-radius: 4px; position: relative; }
+.cell.given::after { content: ''; position: absolute; width: 22%; height: 22%; border-radius: 50%; background: rgba(0,0,0,0.35); left: 39%; top: 39%; }
+html[data-theme="calm"] .cell.given::after { background: rgba(255,255,255,0.7); }
+.cell.given.blank::after { background: var(--muted); }
+.cell.wrongish { outline: 2px solid var(--bad); outline-offset: -2px; }
+.board.solved { box-shadow: 0 0 0 4px var(--good); }
+.axis { position: absolute; background: var(--muted); opacity: 0.6; pointer-events: none; }
+.palette { display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.swatch { width: 40px; height: 40px; border-radius: 12px; border: 3px solid transparent; }
+.swatch.on { border-color: var(--text); transform: scale(1.1); }
+.swatch.blank { background: var(--panel); border: 3px dashed var(--muted); display: grid; place-items: center; color: var(--muted); font-weight: 800; }
+.swatch.blank.on { border-style: solid; border-color: var(--text); }

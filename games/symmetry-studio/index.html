@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Symmetry Studio</title>
+  <meta name="description" content="Half a pattern is given. Complete the mirror, the turn, or the kaleidoscope. Calm colour-grid puzzles with a picture to keep at the end." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Symmetry <span>Studio</span></h1>
+      <p class="tagline">Part of a pattern is given. Complete the rest so the whole grid has the symmetry named at the top: a mirror, a turn, or a kaleidoscope. The grid tells you when it is right.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="board-wrap"><div class="board" id="board"></div></div>
+      <div class="palette" id="palette"></div>
+      <div class="chips" style="margin-top:8px">
+        <button class="chip" id="btn-hint">Show one square</button>
+        <button class="chip" id="btn-new">New pattern</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <p class="muted small" style="text-align:center">Pick a colour, then tap squares. Given squares have a dot and cannot change. The blank colour clears a square.</p>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

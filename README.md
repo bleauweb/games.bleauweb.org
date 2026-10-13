@@ -28,6 +28,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Tile Logic | `games/tile-logic/` | Nonograms. A line-logic solver (placement enumeration per line, iterated) proves every puzzle, random or from the 14-picture library, is finishable by deduction alone; the tests check each picture solves to itself. Tap or drag to fill, mark-empty mode, Check highlights mismatches, finished lines dim. |
 
+| Symmetry Studio | `games/symmetry-studio/` | Complete a colour grid so it has a named symmetry: left–right or top–bottom mirror, four-way mirror, half turn, quarter turns, or eight-way kaleidoscope, from 6×6 to 11×11. Orbit/canonical-cell math is tested for closure and counts; each puzzle's given cells plus symmetry equal the target. |
+
 ### Tools
 
 | Tool | Path | What it is |

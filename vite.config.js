@@ -25,6 +25,7 @@ export default defineConfig({
         forecaster: page('games/forecaster/index.html'),
         'sequence-lab': page('games/sequence-lab/index.html'),
         'tile-logic': page('games/tile-logic/index.html'),
+        'symmetry-studio': page('games/symmetry-studio/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },
