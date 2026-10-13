@@ -1,14 +1,6 @@
 // Permanent upgrades bought with coins between levels. Levels are tuned for an un-upgraded
-// squad, so every one of these is a real edge.
+// squad, so every one of these is a real edge. Extra troops come from the Base (merge grid).
 export const UPGRADES = {
-  start: {
-    name: 'Recruits',
-    desc: '+4 troops at the start of every level',
-    max: 12,
-    effect: (l) => 4 * l,
-    cost: (l) => Math.round(15 * 1.45 ** l),
-    show: (l) => `+${4 * l}`,
-  },
   power: {
     name: 'Firepower',
     desc: '+12% damage from your troops',
@@ -25,12 +17,21 @@ export const UPGRADES = {
     cost: (l) => Math.round(20 * 1.5 ** l),
     show: (l) => `${Math.round(100 - 8 * l)}%`,
   },
+  hero: {
+    name: 'Hero',
+    desc: '+2 hero levels at the start of every level',
+    max: 10,
+    effect: (l) => 1 + 2 * l,
+    cost: (l) => Math.round(25 * 1.5 ** l),
+    show: (l) => `Lv ${1 + 2 * l}`,
+  },
 };
 
-export function statsFor(levels) {
+export function statsFor(levels, armyBonus = 0) {
   return {
-    startBonus: UPGRADES.start.effect(levels.start || 0),
+    startBonus: armyBonus,
     power: UPGRADES.power.effect(levels.power || 0),
     armor: UPGRADES.armor.effect(levels.armor || 0),
+    heroStart: UPGRADES.hero.effect(levels.hero || 0),
   };
 }

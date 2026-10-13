@@ -1,13 +1,13 @@
 // Level generator. Every level is built from its number, so level 12 is the same for everyone.
 //
 // Winnability is designed in, not hoped for. While laying out the lane we track two squads:
-//  - "best": always takes the better gate
-//  - "ok":   takes the better gate about 70% of the time
+//  - "best": always takes the stronger gate
+//  - "ok":   takes the stronger gate about 70% of the time
 // Enemy groups are sized so the ok squad survives them, and the boss is tuned by bisection so
 // the ok squad still finishes with roughly a fifth of its troops. Play well and you win big.
 
 import { mulberry32 } from './rng.js';
-import { applyGate, simulateEncounter, simulateBoss } from './combat.js';
+import { applyGate, simulateEncounter, simulateBoss, squadStrength, MAX_TIER } from './combat.js';
 
 export const ROW_SPACING = 17;
 export const FIRST_ROW_Z = -30;
@@ -19,6 +19,10 @@ export function baseStart(n) {
   return 10 + Math.floor((n - 1) * 1.5);
 }
 
+export function startingSquad(n) {
+  return { count: baseStart(n), tier: 0, hero: 1 };
+}
+
 function difficulty(n) {
   return Math.min(1, (n - 1) / 40);
 }
@@ -27,61 +31,73 @@ function clampInt(v, lo, hi) {
   return Math.max(lo, Math.min(hi, Math.round(v)));
 }
 
-function makeGatePair(rng, n, cBest, cOk) {
+function makeGatePair(rng, n, best, ok) {
   const d = difficulty(n);
   const roll = rng();
+  const c = Math.ceil(best.count);
+  const okSafe = Math.max(1, Math.floor(ok.count * 0.5)); // never take more than half of the ok squad
   let a;
   let b;
-  const okSafe = Math.max(1, Math.floor(cOk * 0.5)); // never take more than half of the ok squad
 
-  if (roll < 0.35) {
+  if (roll < 0.26) {
     // Multiply or add: which is better depends on how big you are right now.
     const mult = rng() < 0.12 + d * 0.12 ? 3 : 2;
-    const k = Math.max(3, Math.round(cBest * (mult - 1) * (0.6 + rng() * 0.8)));
+    const k = Math.max(3, Math.round(c * (mult - 1) * (0.6 + rng() * 0.8)));
     a = { op: '×', value: mult };
     b = { op: '+', value: k };
-  } else if (roll < 0.58) {
+  } else if (roll < 0.44) {
     // Add vs add: read the numbers.
-    const x = Math.max(2, Math.round(cBest * (0.2 + rng() * 0.5)));
-    let y = Math.max(2, Math.round(cBest * (0.2 + rng() * 0.5)));
+    const x = Math.max(2, Math.round(c * (0.2 + rng() * 0.5)));
+    let y = Math.max(2, Math.round(c * (0.2 + rng() * 0.5)));
     if (y === x) y += 2;
     a = { op: '+', value: x };
     b = { op: '+', value: y };
-  } else if (roll < 0.58 + 0.14 + d * 0.22) {
+  } else if (roll < 0.56 && best.tier < MAX_TIER) {
+    // Evolve the army, or just get more of it? UPGRADE is worth about +45% strength.
+    const k = Math.max(3, Math.round(c * (0.2 + rng() * 0.45)));
+    a = { op: 'tier', value: 1 };
+    b = { op: '+', value: k };
+  } else if (roll < 0.66) {
+    // Level the hero, or grow the squad.
+    const lv = 2 + Math.floor(rng() * 4) + Math.floor(d * 4);
+    const k = Math.max(2, Math.round(c * (0.05 + rng() * 0.3)));
+    a = { op: 'hero', value: lv };
+    b = { op: '+', value: k };
+  } else if (roll < 0.66 + 0.12 + d * 0.2) {
     // Lesser evil: both hurt, one hurts less.
-    const x = clampInt(cBest * (0.12 + rng() * 0.28), 1, okSafe);
+    const x = clampInt(c * (0.12 + rng() * 0.28), 1, okSafe);
     if (rng() < 0.5) {
       a = { op: '−', value: x };
       b = { op: '÷', value: 2 };
     } else {
-      let y = clampInt(cBest * (0.12 + rng() * 0.28), 1, okSafe);
+      let y = clampInt(c * (0.12 + rng() * 0.28), 1, okSafe);
       if (y === x) y = Math.max(1, y - 1);
       a = { op: '−', value: x };
       b = { op: '−', value: y };
     }
   } else {
     // Good vs bad: the easy ones, mostly early on.
-    const x = Math.max(2, Math.round(cBest * (0.2 + rng() * 0.6)));
-    const y = clampInt(cBest * (0.1 + rng() * 0.4), 1, okSafe);
+    const x = Math.max(2, Math.round(c * (0.2 + rng() * 0.6)));
+    const y = clampInt(c * (0.1 + rng() * 0.4), 1, okSafe);
     a = { op: '+', value: x };
     b = rng() < 0.3 ? { op: '÷', value: 2 } : { op: '−', value: y };
   }
   return rng() < 0.5 ? [a, b] : [b, a];
 }
 
-function betterOf(count, left, right) {
-  return applyGate(count, left) >= applyGate(count, right) ? left : right;
+export function betterOf(squad, left, right) {
+  return squadStrength(applyGate(squad, left)) >= squadStrength(applyGate(squad, right)) ? left : right;
 }
 
-function worseOf(count, left, right) {
-  return applyGate(count, left) >= applyGate(count, right) ? right : left;
+function worseOf(squad, left, right) {
+  return betterOf(squad, left, right) === left ? right : left;
 }
 
 export function generateLevel(n) {
   const rng = mulberry32(n * 7919 + 13);
   const okRng = mulberry32(n * 31 + 7);
   const d = difficulty(n);
-  const start = baseStart(n);
+  const start = startingSquad(n);
 
   const rowCount = Math.min(15, 7 + Math.floor(n / 3));
   const types = ['gates'];
@@ -107,29 +123,28 @@ export function generateLevel(n) {
     }
   }
 
-  let best = start;
-  let ok = start;
+  let best = { ...start };
+  let ok = { ...start };
   const rows = [];
   let z = FIRST_ROW_Z;
 
   for (const type of types) {
     if (type === 'gates') {
-      const [left, right] = makeGatePair(rng, n, Math.ceil(best), Math.ceil(ok));
-      const cb = Math.ceil(best);
-      const co = Math.ceil(ok);
-      best = applyGate(cb, betterOf(cb, left, right));
-      ok = applyGate(co, okRng() < OK_PLAYER_SKILL ? betterOf(co, left, right) : worseOf(co, left, right));
-      ok = Math.max(ok, 1);
+      const [left, right] = makeGatePair(rng, n, best, ok);
+      best = applyGate(best, betterOf(best, left, right));
+      ok = applyGate(ok, okRng() < OK_PLAYER_SKILL ? betterOf(ok, left, right) : worseOf(ok, left, right));
+      ok.count = Math.max(ok.count, 1);
       rows.push({ type, z, left, right });
     } else if (type === 'enemy') {
       const frac = 0.3 + d * 0.3 + rng() * 0.2;
-      let count = Math.max(3, Math.round(best * frac));
-      count = Math.min(count, Math.max(3, Math.floor(Math.ceil(ok) * 0.75)));
+      let count = Math.max(3, Math.round((squadStrength(best) / 0.6) * frac));
+      // Shrink until the ok squad walks away with at least half of its troops.
+      while (count > 3 && simulateEncounter(ok, count).squad.count < 0.5 * ok.count) count = Math.floor(count * 0.9);
       const where = rng();
       const x = where < 0.4 ? 0 : where < 0.7 ? -1.7 : 1.7;
       const halfWidth = x === 0 ? 3.6 : 1.5;
-      best = simulateEncounter(best, count).count;
-      ok = simulateEncounter(ok, count).count;
+      best = simulateEncounter(best, count).squad;
+      ok = simulateEncounter(ok, count).squad;
       rows.push({ type, z, x, halfWidth, count });
     } else {
       const side = rng() < 0.5 ? -1.6 : 1.6;
@@ -141,15 +156,20 @@ export function generateLevel(n) {
     z -= ROW_SPACING;
   }
 
-  const cOk = Math.ceil(ok);
-  const cBest = Math.ceil(best);
-  const bossDps = Math.max(1.5, 0.08 * cOk * (0.9 + d * 0.5));
+  ok.count = Math.ceil(ok.count);
+  best.count = Math.ceil(best.count);
+  const bossDps = Math.max(1.5, 0.08 * ok.count * (0.9 + d * 0.5));
   let lo = 1;
-  let hi = 200000;
+  let hi = 400000;
+  // Both tracked squads must win with the margin: the best squad can be built differently
+  // (more hero, fewer troops), and the boss fight does not rank squads exactly like gates do.
+  const survives = (hp) => [ok, best].every((s) => {
+    const r = simulateBoss(s, hp, bossDps);
+    return r.won && r.squad.count >= OK_PLAYER_MARGIN * s.count;
+  });
   for (let i = 0; i < 50; i++) {
     const mid = (lo + hi) / 2;
-    const r = simulateBoss(cOk, mid, bossDps);
-    if (r.won && r.count >= OK_PLAYER_MARGIN * cOk) lo = mid;
+    if (survives(mid)) lo = mid;
     else hi = mid;
   }
   const hp = Math.max(10, Math.floor(lo)); // floor keeps the bisection's promise
@@ -161,6 +181,6 @@ export function generateLevel(n) {
     rows,
     boss,
     endZ: boss.z - 30,
-    expected: { best: cBest, ok: cOk },
+    expected: { best, ok },
   };
 }

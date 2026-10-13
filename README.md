@@ -37,12 +37,25 @@ The site is a DigitalOcean App Platform static site described by [`.do/app.yaml`
 
 ## Gate Rush design notes
 
-- `src/combat.js` holds the fight math (a Lanchester-style square law: a bigger squad wins with
-  fewer losses). The level generator and the live game share it.
+The game borrows the parts of the "Top War" and "Hero Wars" ads that are actually fun and makes
+them real: the gate lane, the hordes, the hero with a power number, the merge base, and the
+pull-the-pin treasure rooms.
+
+- `src/combat.js` holds the fight math. A squad is `{ count, tier, hero }`: troops, their tier
+  (Rifles, Heavies, Tanks, Mechs; UPGRADE gates evolve the whole army), and the hero's level
+  (a multiplier on everything). Fights follow a Lanchester-style square law: a bigger, better
+  army wins with fewer losses. The level generator and the live game share these functions.
 - `src/level.js` builds a level from its number. While laying out gates and enemies it tracks a
-  "best" squad and an "ok" squad (right gate ~70% of the time) and sizes enemies and the boss so
+  "best" squad and an "ok" squad (right gate ~70% of the time) and sizes hordes and the boss so
   the ok squad still wins. `tests/level.test.js` checks this for levels 1 to 80.
-- `src/game.js` is the Three.js scene: instanced soldiers, gates with live result previews,
-  bullets and debris pools, boss fight, camera and input.
+- `src/game.js` is the Three.js scene: a platform over water, instanced troops per tier, the
+  hero, signboard gates with live result previews, hordes that charge, streak bullets, the boss
+  fight with a "YOUR POWER vs BOSS" banner (`bossPowerFor` makes the two numbers honest).
+- `src/base.js` is the merge grid. Two units of the same level make one of the next; every unit
+  on the grid adds its worth (2^level − 1) to the starting army. Recruits arrive after wins.
+- `src/pins.js` is the treasure-room world (falling things, lava, water, gold, potions,
+  monsters, pins); `src/rooms.js` holds the rooms as text maps; `src/pinsView.js` draws them.
+  `tests/pins.test.js` brute-forces every pin order to prove each room is solvable and that the
+  wrong order fails.
 - Coins buy permanent upgrades (`src/upgrades.js`); levels are tuned for an un-upgraded squad so
   every upgrade is a real edge rather than a requirement.

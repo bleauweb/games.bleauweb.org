@@ -114,6 +114,35 @@ class GameAudio {
   click() {
     this.tone({ freq: 700, type: 'triangle', dur: 0.05, vol: 0.08 });
   }
+
+  merge() {
+    [440, 660, 880].forEach((f, i) => this.tone({ freq: f, type: 'triangle', dur: 0.12, vol: 0.14, delay: i * 0.05 }));
+    this.tone({ freq: 1320, type: 'sine', dur: 0.3, vol: 0.1, delay: 0.16 });
+  }
+
+  pin() {
+    this.tone({ freq: 900, to: 1500, type: 'square', dur: 0.09, vol: 0.08 });
+    this.noise({ dur: 0.08, vol: 0.08, delay: 0.05 });
+  }
+
+  splash() {
+    this.noise({ dur: 0.35, vol: 0.2 });
+    this.tone({ freq: 600, to: 200, type: 'sine', dur: 0.3, vol: 0.08 });
+  }
+
+  burn() {
+    this.noise({ dur: 0.3, vol: 0.18 });
+    this.tone({ freq: 160, to: 60, type: 'sawtooth', dur: 0.3, vol: 0.1 });
+  }
+
+  potion() {
+    [660, 880, 1320].forEach((f, i) => this.tone({ freq: f, type: 'sine', dur: 0.14, vol: 0.14, delay: i * 0.07 }));
+  }
+
+  /** Play by name; used by modules that only know a sound's name. */
+  play(name) {
+    if (typeof this[name] === 'function' && name !== 'play' && name !== 'tone' && name !== 'noise') this[name]();
+  }
 }
 
 export const audio = new GameAudio();

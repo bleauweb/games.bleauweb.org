@@ -5,6 +5,8 @@ const _m = new THREE.Matrix4();
 const _q = new THREE.Quaternion();
 const _s = new THREE.Vector3();
 const _c = new THREE.Color();
+const _fwd = new THREE.Vector3(0, 0, 1);
+const _dir = new THREE.Vector3();
 
 class InstancePool {
   constructor(geometry, material, capacity) {
@@ -28,7 +30,14 @@ class InstancePool {
     const n = this.items.length;
     for (let i = 0; i < n; i++) {
       const it = this.items[i];
-      _s.setScalar(it.scale);
+      if (it.stretch) {
+        // Streaks: long along their direction of travel, thin across it.
+        _s.set(it.scale, it.scale, it.stretch);
+        _q.setFromUnitVectors(_fwd, _dir.copy(it.vel).normalize());
+      } else {
+        _s.setScalar(it.scale);
+        _q.identity();
+      }
       _m.compose(it.pos, _q, _s);
       this.mesh.setMatrixAt(i, _m);
       this.mesh.setColorAt(i, it.color);
@@ -50,16 +59,17 @@ class InstancePool {
 }
 
 export class BulletPool extends InstancePool {
-  constructor(capacity = 400) {
-    super(new THREE.SphereGeometry(0.12, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffffff }), capacity);
+  constructor(capacity = 500) {
+    // A unit box; streaks stretch it along z, blobs scale it evenly.
+    super(new THREE.BoxGeometry(0.1, 0.1, 1), new THREE.MeshBasicMaterial({ color: 0xffffff }), capacity);
   }
 
   /** Fire from `from` toward `to`; `onArrive` runs when it gets there (visual only). */
-  fire(from, to, { speed = 48, color = 0xffe066, scale = 1, onArrive = null } = {}) {
+  fire(from, to, { speed = 48, color = 0xffe066, scale = 1, stretch = 1.6, onArrive = null } = {}) {
     const dir = new THREE.Vector3().subVectors(to, from);
     const dist = dir.length();
     dir.normalize().multiplyScalar(speed);
-    this.spawn({ pos: from.clone(), vel: dir, ttl: dist / speed, scale, color: new THREE.Color(color), onArrive });
+    this.spawn({ pos: from.clone(), vel: dir, ttl: dist / speed, scale, stretch, color: new THREE.Color(color), onArrive });
   }
 
   update(dt) {

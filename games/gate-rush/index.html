@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>Gate Rush</title>
-  <meta name="description" content="Steer your squad through the right gates, shoot through the enemies, beat the boss. A lane runner you can actually win." />
+  <meta name="description" content="Steer your squad through the right gates, shoot through the hordes, beat the boss. Merge your army between runs and raid treasure rooms. A lane runner you can actually win." />
   <meta name="theme-color" content="#0f1626" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -20,17 +20,25 @@
   <div id="hud" class="layer hidden">
     <div class="hud-row">
       <div class="pill" id="hud-level">Level 1</div>
+      <div class="pill blue"><span id="hud-count">0</span><small id="hud-tier">Rifles</small></div>
+      <div class="pill power">⚡ <span id="hud-power">0</span></div>
+      <div class="pill purple">🗡 <span id="hud-hero">Lv 1</span></div>
       <div class="pill gold"><span class="coin-icon"></span><span id="hud-coins">0</span></div>
       <button class="icon-btn" id="btn-pause" aria-label="Pause">❚❚</button>
+    </div>
+    <div id="vs" class="vs hidden">
+      <div class="side you"><small>YOUR POWER</small><b id="vs-you">0</b></div>
+      <div class="vs-mid">VS</div>
+      <div class="side boss"><small>BOSS</small><b id="vs-boss">0</b></div>
     </div>
     <div id="hint" class="hint">Drag left or right to steer</div>
   </div>
 
-  <!-- Title / level select / shop -->
+  <!-- Title -->
   <section id="screen-title" class="layer panel">
     <div class="card">
       <h1 class="logo">Gate <span>Rush</span></h1>
-      <p class="tagline">Pick the gates that grow your squad. Shoot through everything else. Beat the boss.</p>
+      <p class="tagline">Pick the gates that grow your army. Shoot through the hordes. Beat the boss.</p>
 
       <div class="level-pick">
         <button class="icon-btn" id="lvl-prev" aria-label="Previous level">‹</button>
@@ -43,17 +51,26 @@
 
       <button class="big" id="btn-play">Play</button>
 
+      <div class="nav">
+        <button class="nav-btn" id="btn-base"><span class="nav-title">Base</span><span class="nav-sub" id="nav-army">+0 troops</span></button>
+        <button class="nav-btn" id="btn-rooms"><span class="nav-title">Treasure rooms</span><span class="nav-sub" id="nav-rooms">0 open</span></button>
+      </div>
+
       <div class="wallet"><span class="coin-icon"></span><span id="title-coins">0</span> coins</div>
-      <div class="shop" id="shop"></div>
+      <details class="how">
+        <summary>Upgrades</summary>
+        <div class="shop" id="shop"></div>
+      </details>
 
       <details class="how">
         <summary>How to play</summary>
         <ul>
           <li><b>Steer</b> by dragging anywhere (or use ← → / A D).</li>
-          <li><b>Gates</b> change your troop count. Green grows it, red shrinks it. Each gate shows what you would end up with.</li>
-          <li><b>Enemies</b> fire back once you are close. A bigger squad wins fights with fewer losses. Side groups can be dodged; walls cannot.</li>
-          <li><b>The boss</b> waits at the end. Arrive with as many troops as you can.</li>
-          <li><b>Coins</b> buy permanent upgrades. Every level is beatable without them.</li>
+          <li><b>Gates</b> change your army. Blue and gold grow it, red shrinks it, teal <b>UPGRADE</b>s every troop to the next tier, purple levels the <b>hero</b>. Each gate shows what you would get.</li>
+          <li><b>Hordes</b> charge at you and fire back once you are close. A bigger, better army wins with fewer losses. Side groups can be dodged; walls cannot.</li>
+          <li><b>The boss</b> waits at the end. If your power number is higher than its, you have it.</li>
+          <li><b>Base:</b> merge two units of the same level to make a stronger one. Everything on the grid marches with you.</li>
+          <li><b>Treasure rooms:</b> pull the pins in the right order. Water quenches lava, potions make the hero stronger, gold is gold.</li>
         </ul>
       </details>
 
@@ -65,6 +82,48 @@
     </div>
   </section>
 
+  <!-- Base: merge grid -->
+  <section id="screen-base" class="layer panel hidden">
+    <div class="card">
+      <h2>Base</h2>
+      <p class="muted">Drag two units of the same level together to merge them. Every unit on the grid joins your starting army.</p>
+      <div class="army" id="base-army"></div>
+      <div id="base-grid"></div>
+      <div class="row">
+        <button class="big" id="btn-recruit">Recruit</button>
+        <button class="big ghost" id="btn-merge-all">Merge all</button>
+      </div>
+      <div class="wallet"><span class="coin-icon"></span><span id="base-coins">0</span> coins</div>
+      <button class="link" id="btn-base-back">Back</button>
+    </div>
+  </section>
+
+  <!-- Treasure rooms list -->
+  <section id="screen-rooms" class="layer panel hidden">
+    <div class="card">
+      <h2>Treasure rooms</h2>
+      <p class="muted">A new room opens every two levels. Pull the pins in the right order; the hero keeps what reaches him.</p>
+      <div class="rooms" id="rooms-list"></div>
+      <button class="link" id="btn-rooms-back">Back</button>
+    </div>
+  </section>
+
+  <!-- One treasure room -->
+  <section id="screen-room" class="layer room hidden">
+    <div class="room-top">
+      <div><b id="room-name"></b><div class="muted" id="room-hint"></div></div>
+      <button class="icon-btn" id="room-back" aria-label="Back">✕</button>
+    </div>
+    <canvas id="room-canvas"></canvas>
+    <div class="room-bottom">
+      <div id="room-status" class="muted">Tap a pin to pull it.</div>
+      <div class="row">
+        <button class="big" id="room-leave">Leave with loot</button>
+        <button class="big ghost" id="room-retry">Retry</button>
+      </div>
+    </div>
+  </section>
+
   <!-- End of level -->
   <section id="screen-end" class="layer panel hidden">
     <div class="card">
@@ -72,6 +131,7 @@
       <div class="stars big-stars" id="end-stars"></div>
       <p id="end-text"></p>
       <div class="rewards" id="end-rewards"></div>
+      <button class="big gold-btn hidden" id="btn-room-unlocked">A treasure room opened!</button>
       <div class="row">
         <button class="big" id="btn-next">Next level</button>
         <button class="big ghost" id="btn-retry">Replay</button>
