@@ -1,0 +1,14 @@
+.board-wrap { overflow: auto; display: flex; justify-content: center; }
+.board { display: grid; gap: 0; user-select: none; touch-action: none; }
+.board .corner { background: transparent; }
+.board .clue { display: flex; align-items: flex-end; justify-content: flex-end; gap: 3px; font-weight: 800; font-size: var(--clue-font); color: var(--text); padding: 2px; }
+.board .clue.col { flex-direction: column; align-items: center; justify-content: flex-end; }
+.board .clue.done { color: var(--muted); opacity: 0.55; }
+.board .cell { width: var(--cell); height: var(--cell); border: 1px solid var(--line); background: var(--panel); position: relative; }
+.board .cell.r5 { border-right: 2px solid var(--muted); }
+.board .cell.b5 { border-bottom: 2px solid var(--muted); }
+.board .cell.fill { background: var(--text); }
+.board .cell.x::after { content: '×'; position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: calc(var(--cell) * 0.7); line-height: 1; }
+.board .cell.wrong { background: var(--bad); }
+.board.solved .cell.fill { background: var(--good); }
+.board.solved .cell.x::after { content: ''; }

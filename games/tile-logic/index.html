@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tile Logic</title>
+  <meta name="description" content="Nonogram picture puzzles. Fill the grid from the row and column clues to reveal a picture. Every puzzle can be finished by deduction alone." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Tile <span>Logic</span></h1>
+      <p class="tagline">Fill the grid from the numbers. Each number is a run of filled squares in that row or column, in order, with at least one gap between runs. Every puzzle here can be finished by pure deduction, no guessing.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="board-wrap"><div id="board" class="board"></div></div>
+      <div class="chips" style="margin-top:10px">
+        <button class="chip on" id="mode-fill">■ Fill</button>
+        <button class="chip" id="mode-x">✕ Mark empty</button>
+        <button class="chip" id="btn-check">Check</button>
+        <button class="chip" id="btn-new">New puzzle</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <p class="muted small" style="text-align:center">Tap a square to fill it. Tap again to clear. Drag to do a run. Finished rows and columns go quiet.</p>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

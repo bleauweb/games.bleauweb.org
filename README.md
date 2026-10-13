@@ -26,6 +26,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 | --- | --- | --- |
 | Sequence Lab | `games/sequence-lab/` | What comes next: number rules (steps, multiples, alternating gaps, squares, triangles, sums) and shape rules (shape, colour, size, rotation cycling, up to three at once). Four options, the rule explained after each answer. Generator tested for valid, distinct options across every level. |
 
+| Tile Logic | `games/tile-logic/` | Nonograms. A line-logic solver (placement enumeration per line, iterated) proves every puzzle, random or from the 14-picture library, is finishable by deduction alone; the tests check each picture solves to itself. Tap or drag to fill, mark-empty mode, Check highlights mismatches, finished lines dim. |
+
 ### Tools
 
 | Tool | Path | What it is |

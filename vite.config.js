@@ -24,6 +24,7 @@ export default defineConfig({
         'morse-ear': page('games/morse-ear/index.html'),
         forecaster: page('games/forecaster/index.html'),
         'sequence-lab': page('games/sequence-lab/index.html'),
+        'tile-logic': page('games/tile-logic/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },
