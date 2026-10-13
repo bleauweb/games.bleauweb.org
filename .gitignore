@@ -3,3 +3,8 @@ dist/
 .DS_Store
 *.log
 .vite/
+gameboy/build/
+gameboy/common/*_tiles.c
+gameboy/common/*_tiles.h
+gameboy/games/*/tiles.c
+gameboy/games/*/tiles.h
