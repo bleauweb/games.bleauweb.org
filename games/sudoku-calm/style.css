@@ -1,0 +1,16 @@
+.board-wrap { display: flex; justify-content: center; }
+.board { display: grid; gap: 0; border: 3px solid var(--muted); border-radius: 8px; overflow: hidden; }
+.cell { width: var(--cell); height: var(--cell); border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; font-weight: 800; font-size: calc(var(--cell) * 0.45); position: relative; color: var(--accent); }
+.cell.given { color: var(--text); background: var(--panel-2); }
+.cell.bx { border-right: 3px solid var(--muted); }
+.cell.by { border-bottom: 3px solid var(--muted); }
+.cell.sel { outline: 3px solid var(--accent); outline-offset: -3px; z-index: 1; }
+.cell.same { background: rgba(90,160,255,0.18); }
+.cell.conflict { color: var(--bad); }
+.cell .notes { position: absolute; inset: 2px; display: grid; grid-template-columns: repeat(3, 1fr); font-size: calc(var(--cell) * 0.22); color: var(--muted); font-weight: 700; line-height: 1; }
+.cell .notes span { display: grid; place-items: center; }
+.board.solved .cell { color: var(--good); }
+.pad { display: grid; grid-template-columns: repeat(var(--pad), 1fr); gap: 6px; margin-top: 12px; }
+.pad button { border: 0; border-radius: 12px; padding: 12px 0; background: var(--panel-2); color: var(--text); font-weight: 800; font-size: 1.1rem; }
+.pad button.done { opacity: 0.35; }
+.pad button.clear { background: var(--panel); border: 1px solid var(--line); }

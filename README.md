@@ -56,6 +56,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Mosaic Numbers | `games/mosaic-numbers/` | Fill-a-Pix. Clues are thinned while a single-clue propagation solver (all-or-nothing per block) still finishes the grid, so no cross-clue reasoning or guessing is ever required (tested, including the Tile Logic picture library). Satisfied clues fade; drag to paint; Check outlines mismatches. |
 
+| Sudoku Calm | `games/sudoku-calm/` | Sudoku (4×4, 6×6, 9×9 gentle and normal). A full grid is built by backtracking, then thinned only while a naked-and-hidden-singles solver still finishes it; uniqueness is tested separately. Notes, optional candidate display, conflict colouring, and a hint that names the single it used. |
+
 ### Tools
 
 | Tool | Path | What it is |
