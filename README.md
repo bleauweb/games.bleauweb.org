@@ -54,6 +54,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Binary Grid | `games/binary-grid/` | Takuzu / 0h h1. A full valid grid is built by backtracking, then thinned while a solver confirms a single solution (tested 4×4–10×10). Tap cycles blank → blue → orange; feedback names the rule being broken; Check outlines mismatches; "Fill one square" for a nudge. |
 
+| Mosaic Numbers | `games/mosaic-numbers/` | Fill-a-Pix. Clues are thinned while a single-clue propagation solver (all-or-nothing per block) still finishes the grid, so no cross-clue reasoning or guessing is ever required (tested, including the Tile Logic picture library). Satisfied clues fade; drag to paint; Check outlines mismatches. |
+
 ### Tools
 
 | Tool | Path | What it is |

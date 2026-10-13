@@ -1,0 +1,10 @@
+.board-wrap { display: flex; justify-content: center; }
+.board { display: grid; gap: 2px; touch-action: none; }
+.cell { width: var(--cell); height: var(--cell); border-radius: 4px; border: 1px solid var(--line); background: var(--panel); position: relative; font-weight: 800; font-size: calc(var(--cell) * 0.5); display: grid; place-items: center; color: var(--text); }
+.cell.fill { background: var(--text); color: var(--bg); }
+.cell.x::after { content: '×'; position: absolute; color: var(--muted); font-size: calc(var(--cell) * 0.6); }
+.cell.x { color: transparent; }
+.cell.sat { opacity: 0.6; }
+.cell.wrong { outline: 3px solid var(--bad); outline-offset: -3px; }
+.board.solved .cell.fill { background: var(--good); color: #fff; }
+.board.solved .cell.x::after { content: ''; }
