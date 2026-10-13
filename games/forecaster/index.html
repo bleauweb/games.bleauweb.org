@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Forecaster</title>
+  <meta name="description" content="Predict tomorrow's weather for a small town from the data you can afford. Points buy better instruments. Five perfect days in a row makes you Forecaster of the Year." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="stat points" id="t-points"></div>
+    <div class="stat streak" id="t-streak" title="Perfect days in a row"></div>
+    <div class="stat day" id="t-day"></div>
+  </header>
+  <main id="view"></main>
+  <nav class="tabs">
+    <button data-tab="desk" class="on">Desk</button>
+    <button data-tab="gear">Instruments</button>
+    <button data-tab="log">Record</button>
+  </nav>
+  <div id="toasts"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

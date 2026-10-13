@@ -22,6 +22,7 @@ export default defineConfig({
         workshop: page('games/workshop/index.html'),
         capitals: page('games/capitals/index.html'),
         'morse-ear': page('games/morse-ear/index.html'),
+        forecaster: page('games/forecaster/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },
