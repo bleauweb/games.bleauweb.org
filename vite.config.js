@@ -15,6 +15,8 @@ export default defineConfig({
         'gate-rush': page('games/gate-rush/index.html'),
         'treble-maker': page('games/treble-maker/index.html'),
         'note-by-note': page('games/note-by-note/index.html'),
+        'flute-fingers': page('games/flute-fingers/index.html'),
+        tuner: page('tools/tuner/index.html'),
       },
     },
   },

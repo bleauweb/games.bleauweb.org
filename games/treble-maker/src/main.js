@@ -4,6 +4,7 @@ import { Staff, W, HIT_X, NOTE_X } from './staff.js';
 import { Piano } from './piano.js';
 import { audio } from './audio.js';
 import { loadSave, writeSave, resetSave } from './save.js';
+import { PitchListener, midiName } from '/shared/pitch.js';
 
 const $ = (id) => document.getElementById(id);
 const show = (el, on) => el.classList.toggle('hidden', !on);
@@ -18,6 +19,32 @@ let feedbackTimer = 0;
 const staff = new Staff($('staff'));
 const piano = new Piano($('piano'), { onKey: onAnswer, labels: save.labels });
 audio.setMuted(save.muted);
+
+// Play a real instrument instead of the on-screen piano: a detected note answers like a key.
+const mic = new PitchListener({
+  onNote: (m) => onAnswer(((m % 12) + 12) % 12),
+  onPitch: (p) => {
+    if (!mic.running) return;
+    $('mic-status').textContent = p.nearest !== null ? `Hearing ${midiName(p.nearest)}` : 'Listening…';
+  },
+  onState: (st) => {
+    $('btn-mic').textContent = st === 'on' ? '🎤 Microphone on' : '🎤 Use my instrument';
+    $('btn-mic').classList.toggle('on', st === 'on');
+    $('mic-status').textContent = st === 'on' ? 'Listening…' : '';
+  },
+});
+$('btn-mic').addEventListener('click', async () => {
+  try {
+    if (mic.running) mic.stop();
+    else await mic.start();
+  } catch (e) {
+    $('mic-status').textContent = e.message || 'Could not start the microphone.';
+  }
+});
+// Sound the target note only when the player is not already hearing their own instrument.
+const sound = (midiNumber, opts) => {
+  if (!mic.running) audio.note(midiNumber, opts);
+};
 
 // ---------- title ----------
 
@@ -110,6 +137,7 @@ function record(item, ok) {
 
 function toTitle() {
   stopRush();
+  if (mic.running) mic.stop();
   show($('screen-play'), false);
   show($('screen-results'), false);
   renderTitle();
@@ -168,7 +196,7 @@ function learnKey(pc) {
     staff.mark(q, ok);
     staff.caption(ok ? `${noteName(q.item.note)} ✓` : `✗ That was ${noteName(q.item.note)}`, ok ? 'ok' : 'bad');
     piano.flash(pc, ok);
-    audio.note(midi(q.item.note));
+    sound(midi(q.item.note));
     record(q.item, ok);
     writeSave(save);
     session.quiz = null;
@@ -180,7 +208,7 @@ function learnKey(pc) {
   staff.clear();
   staff.caption('');
   staff.addNote(item, NOTE_X, { label: noteName(note) });
-  audio.note(midi(note), { vol: 0.3 });
+  sound(midi(note), { vol: 0.3 });
 }
 
 // ---------- practice ----------
@@ -211,7 +239,7 @@ function practiceKey(pc) {
   const ok = isCorrect(h.item, pc);
   staff.mark(h, ok);
   piano.flash(pc, ok);
-  audio.note(midi(h.item.note));
+  sound(midi(h.item.note));
   if (ok) {
     session.correct++;
     staff.caption(`${noteName(h.item.note)} ✓`, 'ok');
@@ -346,7 +374,7 @@ function rushKey(pc) {
   const ok = isCorrect(h.item, pc);
   staff.mark(h, ok);
   piano.flash(pc, ok);
-  audio.note(midi(h.item.note), { dur: 0.8 });
+  sound(midi(h.item.note), { dur: 0.8 });
   record(h.item, ok);
   if (ok) {
     s.combo++;

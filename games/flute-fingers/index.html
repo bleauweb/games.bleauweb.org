@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Flute Fingers</title>
+  <meta name="description" content="Learn flute fingerings: see a note, finger it on a flute diagram, name a fingering, or play the note on your real flute and let the microphone check it." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="card">
+      <h1 class="logo">Flute <span>Fingers</span></h1>
+      <p class="tagline">Which keys for which note. Learn them, finger them, name them, then play them on your flute and let the microphone listen.</p>
+      <div class="levels" id="levels"></div>
+      <div class="foot">
+        <button class="link" id="btn-mute">Sound: on</button>
+        <a class="link" href="/tools/tuner/">Flute tuner</a>
+        <a class="link" href="/">All games</a>
+        <button class="link danger" id="btn-reset">Reset progress</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-play" class="screen play hidden">
+    <div class="topbar">
+      <button class="icon-btn" id="btn-close" aria-label="Close">✕</button>
+      <div class="top-mid">
+        <div class="top-title" id="play-title"></div>
+        <div class="top-sub" id="play-sub"></div>
+      </div>
+      <div class="top-right" id="play-right"></div>
+    </div>
+    <div class="staff-card">
+      <svg id="staff" role="img" aria-label="Music staff"></svg>
+    </div>
+    <div class="flute-card">
+      <svg id="flute" role="img" aria-label="Flute keys"></svg>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="controls" id="controls"></div>
+    <div class="micbar hidden" id="micbar">
+      <span class="mic-dot" id="mic-dot"></span>
+      <span id="mic-status">Microphone off</span>
+    </div>
+    <div class="spacer"></div>
+    <div id="piano" class="hidden"></div>
+  </section>
+
+  <section id="screen-results" class="screen hidden">
+    <div class="card">
+      <h2 id="res-title"></h2>
+      <div class="stars big-stars" id="res-stars"></div>
+      <p id="res-text"></p>
+      <div class="misses" id="res-misses"></div>
+      <div class="row">
+        <button class="big" id="btn-again">Again</button>
+        <button class="big ghost" id="btn-res-menu">Levels</button>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -5,9 +5,22 @@ game lives in its own folder under `games/` and is reachable at `/games/<name>/`
 
 | Game | Path | What it is |
 | --- | --- | --- |
+| Flute Fingers | `games/flute-fingers/` | Flute fingering trainer for the first two octaves (C4–C♯6). Learn (chart, tips, alternative fingerings), Finger it (set the keys on an SVG flute, get told what to add or lift), Name it (fingering shown, answer on the piano), Play it (play the note on a real flute; the microphone checks pitch and octave). The chart is tested. |
 | Note by Note | `games/note-by-note/` | Learn public-domain songs by reading them. Twenty melodies on a scrolling SVG staff (bar lines, note values, rests), answered on the on-screen piano. Listen / Learn (step through, hints after a wrong key, phrase practice) / Play (count-in, metronome, timing windows, accuracy and stars). Songs are text with bar lines; a test checks every bar adds up to the time signature. Shares its music model, piano and synth with Treble Maker. |
 | Treble Maker | `games/treble-maker/` | A note-reading trainer: notes on an SVG staff, answered on an on-screen piano. Learn (names and mnemonics on the staff), Practice (12 notes, pass at 80% to unlock the next level), Rush (notes scroll toward a line; three lives). Nine levels from treble lines to sharps and flats; missed notes come back more often. |
 | Gate Rush | `games/gate-rush/` | A WebGL lane runner in the style of the "pick the gate" mobile-game ads, except it is tuned so you can actually win. Three.js, touch and keyboard, saves progress in the browser. |
+
+### Tools
+
+| Tool | Path | What it is |
+| --- | --- | --- |
+| Flute Tuner | `tools/tuner/` | Chromatic tuner: note, cents needle, A4 reference 438–444, the fingering of the detected note, a reference tone, and flute tuning tips. |
+
+Treble Maker and Note by Note also accept a real instrument through the microphone ("Use my
+instrument"): a detected note answers like a key press. Pitch detection is `shared/pitch.js`
+(normalised autocorrelation, tested in Node with synthetic tones). Microphone input needs a
+secure context: it works on `localhost` and on the deployed HTTPS site, not over plain HTTP on
+the LAN.
 
 ## Develop
 

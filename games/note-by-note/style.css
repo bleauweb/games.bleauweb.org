@@ -96,6 +96,8 @@ h2 { margin: 0 0 8px; font-size: 1.7rem; }
 .feedback.ok { color: var(--good); }
 .feedback.bad { color: var(--bad); }
 .controls { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.micbar { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+.micbar .chip.on { background: rgba(61,220,132,0.18); border-color: var(--good); color: #c6f6d5; }
 .chip { border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
 .chip.on { background: rgba(90,160,255,0.2); border-color: var(--accent); color: #cfe3ff; }
 .chip.go { background: var(--gold); color: #06112a; border-color: var(--gold); }

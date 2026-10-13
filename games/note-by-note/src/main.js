@@ -4,6 +4,7 @@ import { Score } from './score.js';
 import { Piano } from '../../treble-maker/src/piano.js';
 import { audio } from '../../treble-maker/src/audio.js';
 import { noteName } from '../../treble-maker/src/music.js';
+import { PitchListener, midiName } from '/shared/pitch.js';
 
 const $ = (id) => document.getElementById(id);
 const show = (el, on) => el.classList.toggle('hidden', !on);
@@ -37,6 +38,31 @@ let raf = 0;
 const score = new Score($('score'));
 const piano = new Piano($('piano'), { onKey: onKey, labels: save.labels });
 audio.setMuted(save.muted);
+
+// Play the song on a real instrument: a detected note counts like a key press.
+const mic = new PitchListener({
+  onNote: (m) => onKey(((m % 12) + 12) % 12),
+  onPitch: (p) => {
+    if (!mic.running) return;
+    $('mic-status').textContent = p.nearest !== null ? `Hearing ${midiName(p.nearest)}` : 'Listening…';
+  },
+  onState: (st) => {
+    $('btn-mic').textContent = st === 'on' ? '🎤 Microphone on' : '🎤 Use my instrument';
+    $('btn-mic').classList.toggle('on', st === 'on');
+    $('mic-status').textContent = st === 'on' ? 'Listening…' : '';
+  },
+});
+$('btn-mic').addEventListener('click', async () => {
+  try {
+    if (mic.running) mic.stop();
+    else await mic.start();
+  } catch (e) {
+    $('mic-status').textContent = e.message || 'Could not start the microphone.';
+  }
+});
+const sound = (midiNumber, opts) => {
+  if (!mic.running) audio.note(midiNumber, opts);
+};
 
 // ---------- song list ----------
 
@@ -132,6 +158,7 @@ function stop() {
 
 function toTitle() {
   stop();
+  if (mic.running) mic.stop();
   show($('screen-play'), false);
   show($('screen-results'), false);
   renderTitle();
@@ -269,7 +296,7 @@ function learnKey(pc) {
   const e = s.queue[s.i];
   const idx = song.events.indexOf(e);
   if (pc === e.pc) {
-    audio.note(e.midi, { dur: noteSeconds(e), vol: 0.32 });
+    sound(e.midi, { dur: noteSeconds(e), vol: 0.32 });
     score.setState(idx, 'ok');
     score.hint(idx, false);
     piano.flash(pc, true);
@@ -413,7 +440,7 @@ function playKey(pc) {
     s.hits++;
     const perfect = bestD <= PERFECT;
     if (perfect) s.perfect++;
-    audio.note(best.midi, { dur: noteSeconds(best, s.speed), vol: 0.32 });
+    sound(best.midi, { dur: noteSeconds(best, s.speed), vol: 0.32 });
     score.setState(song.events.indexOf(best), 'ok');
     piano.flash(pc, true);
     feedback(perfect ? 'Perfect!' : 'Good', 'ok');

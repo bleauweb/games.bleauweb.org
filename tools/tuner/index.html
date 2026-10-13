@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Flute Tuner</title>
+  <meta name="description" content="A chromatic tuner in the browser, made for flute players: note, cents, reference pitch, the fingering of what you are playing, and a reference tone." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Flute <span>Tuner</span></h1>
+      <p class="muted">Chromatic tuner for flute and other melodic instruments. Nothing leaves your device.</p>
+    </header>
+
+    <section class="dial-card">
+      <svg id="dial" viewBox="0 0 400 230" role="img" aria-label="Tuning needle"></svg>
+      <div class="readout">
+        <div class="note" id="note">—</div>
+        <div class="cents" id="cents">play a note</div>
+        <div class="hz muted" id="hz"></div>
+      </div>
+      <button class="big" id="btn-start">Start listening</button>
+      <div class="advice muted" id="advice"></div>
+    </section>
+
+    <section class="opts">
+      <label>Reference A4
+        <select id="a4">
+          <option>438</option><option>439</option><option selected>440</option><option>441</option><option>442</option><option>443</option><option>444</option>
+        </select>
+        Hz
+      </label>
+      <label class="check"><input type="checkbox" id="show-flute" checked /> Show flute fingering</label>
+    </section>
+
+    <section class="flute-card" id="flute-card">
+      <svg id="flute" role="img" aria-label="Flute keys"></svg>
+      <div class="muted small" id="flute-note"></div>
+    </section>
+
+    <section class="tone">
+      <h2>Reference tone</h2>
+      <div class="tone-row">
+        <select id="tone-note"></select>
+        <button class="chip" id="btn-tone">▶ Play</button>
+      </div>
+      <p class="muted small">Play the tone, then match it. Flutes usually tune to A at 440 or 442 depending on the group.</p>
+    </section>
+
+    <section class="tips muted small">
+      <h2>Tuning a flute</h2>
+      <ul>
+        <li>Warm up first: a cold flute plays flat and rises as it warms.</li>
+        <li>Sharp overall: pull the head joint out a little. Flat overall: push it in.</li>
+        <li>Rolling the flute in lowers the pitch; rolling it out raises it. Use this for single notes, not the whole instrument.</li>
+        <li>Soft playing tends flat, loud playing tends sharp. Tune at the dynamic you will play.</li>
+        <li>C♯5 and the third octave run sharp on most flutes; low notes often run flat. That is the instrument, not you.</li>
+      </ul>
+    </section>
+
+    <footer class="muted small"><a href="/">All games and tools</a> · <a href="/games/flute-fingers/">Flute Fingers</a></footer>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
