@@ -30,6 +30,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Symmetry Studio | `games/symmetry-studio/` | Complete a colour grid so it has a named symmetry: left–right or top–bottom mirror, four-way mirror, half turn, quarter turns, or eight-way kaleidoscope, from 6×6 to 11×11. Orbit/canonical-cell math is tested for closure and counts; each puzzle's given cells plus symmetry equal the target. |
 
+| Sort and Stack | `games/sort-and-stack/` | Tap an item, tap a bin. Rules: one attribute (labelled), two attributes combined (labelled), then hidden rules shown only by one example per bin, yes/no rules, and a mix. Generator guarantees at least two items per bin; a hint names the attribute after two misses; the rule is spelled out at the end. |
+
 ### Tools
 
 | Tool | Path | What it is |

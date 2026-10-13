@@ -26,6 +26,7 @@ export default defineConfig({
         'sequence-lab': page('games/sequence-lab/index.html'),
         'tile-logic': page('games/tile-logic/index.html'),
         'symmetry-studio': page('games/symmetry-studio/index.html'),
+        'sort-and-stack': page('games/sort-and-stack/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
     },

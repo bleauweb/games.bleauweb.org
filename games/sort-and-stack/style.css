@@ -1,0 +1,15 @@
+.bins { display: grid; gap: 8px; grid-template-columns: repeat(var(--bins), 1fr); }
+.bin { background: var(--panel); border: 2px dashed var(--line); border-radius: 16px; min-height: 120px; padding: 8px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.bin.target { border-color: var(--accent); border-style: solid; }
+.bin .label { font-weight: 800; font-size: 0.85rem; text-align: center; color: var(--muted); min-height: 1.2em; }
+.bin .stack { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+.bin.full { border-color: var(--good); border-style: solid; }
+.item { width: 54px; height: 54px; border-radius: 14px; background: var(--panel-2); display: grid; place-items: center; border: 2px solid transparent; }
+.item.small-item { width: 44px; height: 44px; }
+.bin .item { width: 34px; height: 34px; border-radius: 9px; }
+.item.on { border-color: var(--accent); transform: scale(1.08); }
+.item.ex { opacity: 0.9; }
+.item svg { width: 80%; height: 80%; }
+.tray { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; min-height: 80px; }
+.shake { animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
