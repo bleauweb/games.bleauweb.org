@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Rhythm Patterns</title>
+  <meta name="description" content="Watch a beat pattern play, then mark the steps you saw. No clock while you answer. Tap along live only if you want to." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Rhythm <span>Patterns</span></h1>
+      <p class="tagline">A pattern of steps plays across the grid. Watch it as often as you like, then mark the steps you saw. There is no clock while you answer. Tapping along live is a separate option for when you want it.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="chips" style="margin-bottom:10px">
+        <button class="chip on" id="mode-mark">Watch and mark</button>
+        <button class="chip" id="mode-tap">Tap along</button>
+        <button class="chip" id="speed">Slow</button>
+      </div>
+      <div class="grid-wrap"><div class="grid" id="grid"></div></div>
+      <div class="chips" style="margin-top:10px">
+        <button class="chip" id="btn-play">▶ Play the pattern</button>
+        <button class="chip" id="btn-check">Check</button>
+        <button class="chip" id="btn-new">New pattern</button>
+      </div>
+      <button class="pad hidden" id="pad">TAP</button>
+      <div class="feedback" id="feedback"></div>
+      <div class="explain hidden" id="explain"></div>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

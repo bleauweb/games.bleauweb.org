@@ -32,6 +32,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Sort and Stack | `games/sort-and-stack/` | Tap an item, tap a bin. Rules: one attribute (labelled), two attributes combined (labelled), then hidden rules shown only by one example per bin, yes/no rules, and a mix. Generator guarantees at least two items per bin; a hint names the attribute after two misses; the rule is spelled out at the end. |
 
+| Rhythm Patterns | `games/rhythm-patterns/` | Step patterns (8 or 16 steps, 1–3 instrument rows) play with a visual sweep and optional clicks; the player marks the steps on an empty grid, untimed, and checks. A separate Tap-along mode scores live taps against the drum row with a tolerance. Generator, comparison and tap scoring are tested. |
+
 ### Tools
 
 | Tool | Path | What it is |
