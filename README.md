@@ -52,6 +52,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Number Chain | `games/number-chain/` | Hidato-style: a Hamiltonian snake fills the grid; givens are thinned while a counting solver confirms exactly one solution (tested for 4×4–7×7). Tap a number then the squares after it to count up or down; conflicts are refused; Check outlines misplaced numbers. |
 
+| Binary Grid | `games/binary-grid/` | Takuzu / 0h h1. A full valid grid is built by backtracking, then thinned while a solver confirms a single solution (tested 4×4–10×10). Tap cycles blank → blue → orange; feedback names the rule being broken; Check outlines mismatches; "Fill one square" for a nudge. |
+
 ### Tools
 
 | Tool | Path | What it is |
