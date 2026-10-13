@@ -31,6 +31,7 @@ export default defineConfig({
         'circuit-paths': page('games/circuit-paths/index.html'),
         'tangram-fit': page('games/tangram-fit/index.html'),
         'pattern-weaver': page('games/pattern-weaver/index.html'),
+        'pairs': page('games/pairs/index.html'),
         'slide-picture': page('games/slide-picture/index.html'),
         'stacks': page('games/stacks/index.html'),
         'light-switch': page('games/light-switch/index.html'),

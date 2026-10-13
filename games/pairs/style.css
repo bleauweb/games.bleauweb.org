@@ -1,0 +1,9 @@
+.cards { display: grid; gap: 8px; grid-template-columns: repeat(var(--cols), 1fr); }
+.cardb { aspect-ratio: 3 / 4; border-radius: 12px; border: 2px solid var(--line); background: var(--panel-2); display: grid; place-items: center; position: relative; }
+.cardb::after { content: ''; position: absolute; inset: 10px; border-radius: 8px; border: 2px dashed var(--line); }
+.cardb.up, .cardb.matched { background: var(--panel); }
+.cardb.up::after, .cardb.matched::after { display: none; }
+.cardb svg { width: 70%; height: 70%; display: none; }
+.cardb.up svg, .cardb.matched svg { display: block; }
+.cardb.matched { border-color: var(--good); opacity: 0.85; }
+.cardb.miss { border-color: var(--bad); }

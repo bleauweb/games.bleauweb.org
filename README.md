@@ -48,6 +48,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Slide Picture | `games/slide-picture/` | Sliding-tile puzzle with a procedural picture (seeded SVG gradient and shapes) shown as the goal. Scrambled by legal blank moves (tested solvable by parity), rows/columns slide as a block, numbers toggle, fewest-moves record. |
 
+| Pairs | `games/pairs/` | Memory pairs, 6–30 cards, with shape-only and colour-only variants. Mismatches turn back after a moment or on the next tap (toggle). Deck generation tested: exactly two of every key, variants differ in the non-matching attribute, perfect play finishes in one turn per pair. |
+
 ### Tools
 
 | Tool | Path | What it is |
