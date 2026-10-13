@@ -1,0 +1,8 @@
+.board-row { display: flex; gap: 12px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+.board { display: grid; gap: 3px; background: var(--panel); padding: 4px; border-radius: 12px; }
+.tile { width: var(--cell); height: var(--cell); border-radius: 6px; background-image: var(--img); background-size: calc(var(--cell) * var(--n) + 3px * (var(--n) - 1)) calc(var(--cell) * var(--n) + 3px * (var(--n) - 1)); border: 0; position: relative; color: #fff; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.7); font-size: 0.9rem; }
+.tile.blank { background: transparent; visibility: hidden; }
+.tile .num { position: absolute; top: 3px; left: 5px; }
+.board.nonum .tile .num { display: none; }
+.board.solved .tile.blank { visibility: visible; }
+.goal { width: 96px; height: 96px; border-radius: 10px; background-size: cover; border: 2px solid var(--line); }

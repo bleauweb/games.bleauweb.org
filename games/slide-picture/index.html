@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Slide Picture</title>
+  <meta name="description" content="Sliding-tile puzzles that rebuild a picture. Tap a tile in line with the gap to slide it. Every scramble is made by legal moves, so every one can be solved." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <script type="module" src="/shared/pwa.js"></script>
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Slide <span>Picture</span></h1>
+      <p class="tagline">Tiles of a picture, one missing. Tap a tile in line with the gap to slide it across. The picture is shown beside the board, and every scramble was made by sliding, so it can always be put back.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="board-row">
+        <div class="board" id="board"></div>
+        <div class="goal" id="goal" title="The finished picture"></div>
+      </div>
+      <div class="chips" style="margin-top:10px">
+        <button class="chip" id="btn-numbers">Numbers: on</button>
+        <button class="chip" id="btn-new">New picture</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

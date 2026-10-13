@@ -46,6 +46,8 @@ Built around predictable rules, no timers, and completion. They share `shared/ca
 
 | Stacks | `games/stacks/` | Tower of Hanoi for 3–7 discs with tap-to-move, undo, a hint that gives the next optimal move from any legal position (tested to solve every size in 2ⁿ−1 moves and to recover after detours), and a fewest-moves record. |
 
+| Slide Picture | `games/slide-picture/` | Sliding-tile puzzle with a procedural picture (seeded SVG gradient and shapes) shown as the goal. Scrambled by legal blank moves (tested solvable by parity), rows/columns slide as a block, numbers toggle, fewest-moves record. |
+
 ### Tools
 
 | Tool | Path | What it is |
