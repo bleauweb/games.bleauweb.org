@@ -31,6 +31,7 @@ export default defineConfig({
         'circuit-paths': page('games/circuit-paths/index.html'),
         'tangram-fit': page('games/tangram-fit/index.html'),
         'pattern-weaver': page('games/pattern-weaver/index.html'),
+        gameboy: page('gameboy/index.html'),
         'sudoku-calm': page('games/sudoku-calm/index.html'),
         'mosaic-numbers': page('games/mosaic-numbers/index.html'),
         'binary-grid': page('games/binary-grid/index.html'),

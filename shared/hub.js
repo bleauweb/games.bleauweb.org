@@ -16,7 +16,7 @@ const sections = [...document.querySelectorAll('h2.section')].map((h) => {
 const cards = [];
 sections.forEach((sec) => {
   [...sec.grid.querySelectorAll('.card')].forEach((card, i) => {
-    const slug = (card.getAttribute('href').match(/\/(?:games|tools)\/([a-z0-9-]+)\//) || [])[1];
+    const slug = (card.getAttribute('href').match(/^\/(?:(?:games|tools)\/)?([a-z0-9-]+)\/?$/) || [])[1];
     cards.push({ el: card, slug, section: sec, order: i, title: card.querySelector('h2').textContent.trim(), tags: [...card.querySelectorAll('.tag')].map((t) => t.textContent.trim()), text: card.textContent.toLowerCase() });
     const fav = document.createElement('button');
     fav.className = 'fav';

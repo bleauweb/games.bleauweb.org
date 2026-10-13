@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Boy ROMs</title>
+  <meta name="description" content="The pattern games as Game Boy cartridges: one ROM each, free to download." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="/shared/hub.css" />
+  <style>
+    .roms { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 12px 0; }
+    .rom { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+    .rom h3 { margin: 0; font-size: 1.05rem; }
+    .rom p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .rom .row { display: flex; gap: 8px; align-items: center; margin-top: 4px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 8px 14px; border-radius: 10px; background: var(--accent); color: #fff; font-weight: 800; text-decoration: none; }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .how { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; margin: 12px 0; }
+    .how h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    .how ol, .how ul { margin: 6px 0 0 18px; padding: 0; color: var(--muted); }
+    .how li { margin: 4px 0; }
+    .keys { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin-top: 8px; color: var(--muted); }
+    .keys b { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="/favicon.svg" alt="" />
+      <div>
+        <h1>Game Boy ROMs</h1>
+        <p class="intro">Every pattern game, as a cartridge for the original Game Boy. Download the file, open it in an emulator or write it to a flash cart. <a href="/">Back to the games</a>.</p>
+      </div>
+    </header>
+
+    <div class="how">
+      <h2>How to play them</h2>
+      <ol>
+        <li><b>On a computer:</b> open the .gb file in <a href="https://sameboy.github.io/" rel="noopener">SameBoy</a> or <a href="https://mgba.io/" rel="noopener">mGBA</a>.</li>
+        <li><b>On a phone:</b> Delta (iOS) and most Android emulators open .gb files from your downloads.</li>
+        <li><b>On real hardware:</b> write the file to a Game Boy flash cart. Saves and records are kept on the cartridge battery.</li>
+      </ol>
+      <div class="keys">
+        <b>D-pad</b><span>move the cursor</span>
+        <b>A</b><span>the main action (fill, place, choose)</span>
+        <b>B</b><span>the second action (mark, erase, turn, undo)</span>
+        <b>SELECT</b><span>help: a hint, a check, or a setting</span>
+        <b>START</b><span>pause menu: start over, next puzzle, choose level</span>
+      </div>
+      <p class="muted" style="margin:10px 0 0">The same rules as the web versions: no timers, every answer explained, nothing to lose. Four grey shades stand in for colour, so colours become fills and patterns.</p>
+    </div>
+
+    <h2 class="section">Cartridges</h2>
+    <div class="roms" id="roms"></div>
+  </div>
+  <script type="module">
+    import { calmControls } from '/shared/calm.js';
+    const ROMS = [
+      ['sequence-lab', 'Sequence Lab', 'What comes next: number rules and shape rules, explained after each answer.'],
+      ['tile-logic', 'Tile Logic', 'Nonograms up to 10 x 10, every one finishable by logic alone.'],
+      ['symmetry-studio', 'Symmetry Studio', 'Finish the grid so it mirrors or turns the way it says.'],
+      ['sort-and-stack', 'Sort and Stack', 'Put each thing in its bin; find the rule when the bins only show examples.'],
+      ['rhythm-patterns', 'Rhythm Patterns', 'Watch and listen, then mark the steps you saw. Untimed.'],
+      ['circuit-paths', 'Circuit Paths', 'Join each pair of numbers without crossing, using every square.'],
+      ['tangram-fit', 'Tangram Fit', 'Fill the outline exactly with the pieces. They always fit.'],
+      ['pattern-weaver', 'Pattern Weaver', 'A 16 x 16 canvas where the symmetry paints with you. Three save slots.'],
+      ['odd-one-out', 'Odd One Out', 'Most of them share something; find the one that does not.'],
+      ['light-switch', 'Light Switch', 'Lights Out with a hint that always knows a way to finish.'],
+      ['stacks', 'Stacks', 'Tower of Hanoi, three to six discs, with undo and a next-move hint.'],
+      ['slide-picture', 'Slide Picture', 'Sliding tiles, pictures or numbers, always solvable.'],
+      ['pairs', 'Pairs', 'Memory pairs, 6 to 30 cards.'],
+      ['number-chain', 'Number Chain', 'Hidato: 1 to the end, each number touching the one before.'],
+      ['binary-grid', 'Binary Grid', 'Takuzu: dark or light, same count, never three alike.'],
+      ['mosaic-numbers', 'Mosaic Numbers', 'Fill-a-Pix: a number counts the filled squares around it.'],
+      ['sudoku-calm', 'Sudoku Calm', '4 x 4 to 9 x 9, solvable with singles; hints name the single they used.'],
+    ];
+    document.getElementById('roms').innerHTML = ROMS.map(([slug, name, blurb]) => `
+      <div class="rom">
+        <h3>${name}</h3>
+        <p>${blurb}</p>
+        <div class="row">
+          <a class="btn" href="/roms/${slug}.gb" download>Download .gb</a>
+          <a class="btn ghost" href="/games/${slug}/">Play on the web</a>
+        </div>
+      </div>`).join('');
+    const calm = document.createElement('div'); calm.id = 'calm'; document.querySelector('header').after(calm); calmControls(calm);
+  </script>
+  <script type="module" src="/shared/pwa.js"></script>
+</body>
+</html>

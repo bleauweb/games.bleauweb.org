@@ -87,6 +87,15 @@ Node 20 or newer. There is no backend: everything is static files built by Vite.
 2. Add the page to `rollupOptions.input` in `vite.config.js`.
 3. Add a card to `index.html`.
 
+## Game Boy
+
+Every pattern game also exists as a Game Boy cartridge: `public/roms/<game>.gb`, listed at
+`/gameboy/`. They are written in C with GBDK-2020, share one small library (`gameboy/common/`),
+and bake their puzzles from the web games' own generators, so the uniqueness and no-guessing
+guarantees carry over. Each ROM has a headless-emulator test that plays a puzzle to its win screen.
+See [gameboy/README.md](gameboy/README.md) for the toolchain (GB Studio's bundled GBDK works),
+`npm run roms`, and the Game Boy adaptations (four shades stand in for colour).
+
 ## The hub
 
 `index.html` lists every game and tool by section. `shared/hub.js` adds a search box, section and

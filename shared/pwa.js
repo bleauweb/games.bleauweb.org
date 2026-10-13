@@ -8,7 +8,7 @@ if (!import.meta.env.DEV && 'serviceWorker' in navigator) {
   });
 }
 
-const m = /^\/(games|tools)\/([a-z0-9-]+)\/?/.exec(location.pathname);
+const m = /^\/(?:(games|tools)\/)?([a-z0-9-]+)\/?$/.exec(location.pathname);
 if (m) {
   try {
     const KEY = 'bleauweb.hub.v1';
