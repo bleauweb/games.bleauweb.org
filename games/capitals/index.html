@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Capitals & Flags</title>
+  <meta name="description" content="Learn the capitals and flags of the world, one region at a time. Four modes, and the ones you miss come back more often." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="card">
+      <h1 class="logo">Capitals <span>&amp;</span> Flags</h1>
+      <p class="tagline">One region at a time. Name the capital, the country, or the flag. What you miss comes back until it sticks.</p>
+      <div class="levels" id="levels"></div>
+      <div class="foot">
+        <button class="link" id="btn-reset">Reset progress</button>
+        <a class="link" href="/">All games</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-play" class="screen play hidden">
+    <div class="topbar">
+      <button class="icon-btn" id="btn-close" aria-label="Close">✕</button>
+      <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+      <div class="top-right" id="play-right"></div>
+    </div>
+    <div class="prompt-card"><div class="prompt" id="prompt"></div><div class="hint muted" id="hint"></div></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback"></div>
+  </section>
+
+  <section id="screen-results" class="screen hidden">
+    <div class="card">
+      <h2 id="res-title"></h2>
+      <div class="stars big-stars" id="res-stars"></div>
+      <p id="res-text"></p>
+      <div class="misses" id="res-misses"></div>
+      <div class="row"><button class="big" id="btn-again">Again</button><button class="big ghost" id="btn-res-menu">Regions</button></div>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

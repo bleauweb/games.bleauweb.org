@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Bakery Rush</title>
+  <meta name="description" content="Buy flour, eggs and milk, bake in limited ovens, and keep the shelf full for the lunchtime rush. Build reputation, buy ovens and a delivery bike, win the Golden Whisk." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="stat coins" id="t-coins"></div>
+    <div class="stat level" id="t-level"></div>
+    <div class="stat rep" id="t-rep"></div>
+    <div class="stat day" id="t-day"></div>
+  </header>
+  <div class="xpbar"><div id="xpfill"></div></div>
+  <main id="view"></main>
+  <nav class="tabs">
+    <button data-tab="bake" class="on">Bake</button>
+    <button data-tab="shelf">Shelf</button>
+    <button data-tab="pantry">Pantry</button>
+    <button data-tab="shop">Upgrades</button>
+  </nav>
+  <div id="toasts"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

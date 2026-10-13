@@ -1,0 +1,59 @@
+:root { --bg: #0f1626; --panel: #16213a; --panel-2: #1b2744; --text: #e9eefb; --muted: #9fb0d4; --accent: #5aa0ff; --good: #3ddc84; --bad: #ff5c5c; --gold: #ffc83d; --sat: env(safe-area-inset-top, 0px); --sab: env(safe-area-inset-bottom, 0px); }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body { display: flex; flex-direction: column; position: fixed; inset: 0; user-select: none; -webkit-user-select: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); } .small { font-size: 0.85rem; }
+.top { display: flex; gap: 6px; padding: calc(8px + var(--sat)) 12px 6px; align-items: center; flex-wrap: wrap; }
+.stat { background: var(--panel); border-radius: 999px; padding: 6px 11px; font-weight: 800; white-space: nowrap; font-size: 0.95rem; }
+.stat.coins { color: var(--gold); } .stat.level { color: #9fc4ff; } .stat.rep { color: #ffb3b3; } .stat.day { margin-left: auto; color: var(--muted); font-weight: 700; font-size: 0.88rem; }
+.xpbar { height: 4px; background: rgba(255,255,255,0.08); margin: 0 12px; border-radius: 2px; overflow: hidden; }
+#xpfill { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+main { flex: 1; overflow: auto; padding: 10px 12px calc(16px + var(--sab)); }
+.tabs { display: flex; background: var(--panel); padding: 6px 8px calc(6px + var(--sab)); gap: 6px; }
+.tabs button { flex: 1; border: 0; border-radius: 12px; padding: 10px 4px; background: transparent; color: var(--muted); font-weight: 800; }
+.tabs button.on { background: rgba(90,160,255,0.18); color: #cfe3ff; }
+h2 { font-size: 1.05rem; margin: 14px 0 8px; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+h2 .sub { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+.card { background: var(--panel); border-radius: 16px; padding: 12px; border: 1px solid rgba(255,255,255,0.06); }
+.btn { border: 0; border-radius: 12px; padding: 10px 14px; background: var(--accent); color: #06112a; font-weight: 800; }
+.btn.ghost { background: rgba(255,255,255,0.08); color: var(--text); }
+.btn.gold { background: var(--gold); }
+.btn.small { padding: 6px 10px; font-size: 0.85rem; border-radius: 10px; }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.wide { width: 100%; margin-top: 8px; }
+.rush { background: linear-gradient(90deg, rgba(255,200,61,0.25), var(--panel)); border-color: var(--gold); }
+.rush b { color: var(--gold); }
+.ovens { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
+.oven { background: var(--panel-2); border-radius: 14px; padding: 10px; min-height: 76px; border: 2px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.oven.empty { border-style: dashed; color: var(--muted); font-size: 0.85rem; text-align: center; }
+.oven .bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.oven .bar div { height: 100%; background: #ff9a3d; }
+.recipes { display: grid; gap: 6px; }
+.rec { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; background: var(--panel); border-radius: 14px; padding: 8px 10px; }
+.rec .name { font-weight: 800; }
+.rec .needs { color: var(--muted); font-size: 0.8rem; }
+.rec .needs .lack { color: var(--bad); }
+.rec .btn { grid-row: 1 / span 2; }
+.rec.special .name::after { content: ' · special +30%'; color: var(--gold); font-size: 0.8rem; }
+.rec.locked { opacity: 0.5; }
+.shelf { display: grid; gap: 6px; }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; background: var(--panel); border-radius: 14px; padding: 8px 10px; }
+.item .name { font-weight: 800; } .item .meta { color: var(--muted); font-size: 0.8rem; } .item .price { font-weight: 800; color: var(--gold); white-space: nowrap; }
+.goods { display: grid; gap: 6px; }
+.good { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; background: var(--panel); border-radius: 14px; padding: 8px 10px; }
+.good .name { font-weight: 800; } .good .meta { color: var(--muted); font-size: 0.8rem; } .good .price { font-weight: 800; color: var(--gold); white-space: nowrap; }
+.good .acts { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; }
+.farm { border: 1px solid rgba(61,220,132,0.35); }
+.upg { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; background: var(--panel); border-radius: 14px; padding: 10px 12px; margin-bottom: 6px; }
+.upg .name { font-weight: 800; grid-column: 1; } .upg .cur { color: var(--muted); font-size: 0.82rem; grid-column: 1; } .upg .next { font-size: 0.9rem; margin-top: 4px; grid-column: 1; } .upg .next b { color: #cfe3ff; } .upg .req { color: var(--bad); font-size: 0.8rem; }
+.upg .btn { grid-column: 2; grid-row: 1 / span 3; min-width: 92px; }
+.upg.golden { border: 1px solid var(--gold); background: linear-gradient(135deg, rgba(255,200,61,0.12), var(--panel)); }
+.diary { font-size: 0.85rem; color: var(--muted); } .diary div { padding: 4px 0; border-top: 1px solid rgba(255,255,255,0.06); } .diary b { color: var(--text); margin-right: 6px; }
+#toasts { position: fixed; left: 0; right: 0; top: calc(60px + var(--sat)); display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; z-index: 30; }
+.toast { background: rgba(16,24,44,0.95); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 0.9rem; animation: toast 2.6s forwards; }
+.toast.gold { color: var(--gold); }
+@keyframes toast { 0% { opacity: 0; transform: translateY(-8px); } 10%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.win { text-align: center; padding: 20px 14px; }
+@media (min-width: 700px) { main, .top, .xpbar { max-width: 620px; width: 100%; margin-left: auto; margin-right: auto; } .tabs { justify-content: center; } .tabs button { max-width: 150px; } }

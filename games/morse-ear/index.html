@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Morse Ear</title>
+  <meta name="description" content="Learn Morse code by ear with the Koch method: two characters at full speed, then one more at a time. Copy groups, copy words, and key it yourself." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="card">
+      <h1 class="logo">Morse <span>Ear</span></h1>
+      <p class="tagline">Learn it by ear, the Koch way: two characters at full speed, then one more each lesson. No charts to memorise, just sound.</p>
+      <div class="settings">
+        <label>Character speed <select id="wpm"><option>15</option><option selected>20</option><option>25</option></select> wpm</label>
+        <label>Spacing <select id="eff"><option>8</option><option selected>10</option><option>13</option><option>20</option></select> wpm</label>
+      </div>
+      <div class="lessons" id="lessons"></div>
+      <div class="foot">
+        <button class="link" id="btn-reset">Reset progress</button>
+        <a class="link" href="/">All games</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-play" class="screen play hidden">
+    <div class="topbar">
+      <button class="icon-btn" id="btn-close" aria-label="Close">✕</button>
+      <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+      <div class="top-right" id="play-right"></div>
+    </div>
+    <div class="scope" id="scope"><div class="pulse" id="pulse"></div><div class="big" id="big"></div><div class="code" id="code"></div></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="controls" id="controls"></div>
+    <input id="answer" class="answer hidden" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="type what you heard" />
+    <div id="keys" class="keys hidden"></div>
+    <button id="keyer" class="keyer hidden">HOLD TO KEY</button>
+  </section>
+
+  <section id="screen-results" class="screen hidden">
+    <div class="card">
+      <h2 id="res-title"></h2>
+      <div class="stars big-stars" id="res-stars"></div>
+      <p id="res-text"></p>
+      <div class="misses" id="res-misses"></div>
+      <div class="row"><button class="big" id="btn-again">Again</button><button class="big ghost" id="btn-res-menu">Lessons</button></div>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

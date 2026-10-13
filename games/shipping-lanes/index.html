@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Shipping Lanes</title>
+  <meta name="description" content="Buy low in one port, sail, sell high in another. Six ports, nine goods, storms, charts and bigger ships until you can afford the Admiral's flagship." />
+  <meta name="theme-color" content="#0f1626" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="stat coins" id="t-coins"></div>
+    <div class="stat" id="t-cargo"></div>
+    <div class="stat day" id="t-day"></div>
+  </header>
+  <main id="view"></main>
+  <nav class="tabs">
+    <button data-tab="map" class="on">Map</button>
+    <button data-tab="port">Port</button>
+    <button data-tab="yard">Shipyard</button>
+  </nav>
+  <div id="toasts"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
