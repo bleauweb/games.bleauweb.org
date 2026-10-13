@@ -73,6 +73,20 @@ Node 20 or newer. There is no backend: everything is static files built by Vite.
 2. Add the page to `rollupOptions.input` in `vite.config.js`.
 3. Add a card to `index.html`.
 
+## Offline (PWA)
+
+The whole suite is an installable web app that works without a connection once visited:
+
+- `public/manifest.webmanifest` and `public/icons/` make it installable ("Add to Home Screen").
+- `scripts/make-sw.mjs` runs after `vite build` and writes `dist/sw.js`, a service worker that
+  precaches every built page and asset (the list is generated, so new games are included
+  automatically). Pages are fetched network-first with cache fallback; hashed assets are
+  cache-first. A new build gets a new cache name and old caches are dropped on activation.
+- `shared/pwa.js` registers the worker on every page (the build fails if a page lacks it). It
+  does nothing in `vite dev`, where files change constantly.
+- Progress is in `localStorage`, so it is available offline too. Microphone features need no
+  network either.
+
 ## Deploy
 
 The site is a DigitalOcean App Platform static site described by [`.do/app.yaml`](.do/app.yaml).
