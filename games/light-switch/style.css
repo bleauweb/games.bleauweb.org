@@ -1,0 +1,7 @@
+.board-wrap { display: flex; justify-content: center; }
+.board { display: grid; gap: 8px; }
+.light { width: var(--cell); height: var(--cell); border-radius: 16px; border: 2px solid var(--line); background: var(--panel); transition: background .15s, box-shadow .15s; }
+.light.on { background: #ffd166; border-color: #e0a800; box-shadow: 0 0 18px rgba(255, 209, 102, 0.55); }
+html[data-theme="calm"] .light.on { box-shadow: 0 0 10px rgba(224, 168, 0, 0.5); }
+.light.hint { outline: 3px solid var(--accent); outline-offset: 3px; }
+.board.solved .light { border-color: var(--good); }

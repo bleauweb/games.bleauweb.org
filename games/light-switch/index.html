@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Light Switch</title>
+  <meta name="description" content="Pressing a light toggles it and its neighbours. Turn them all off. Every board was made by pressing lights, so every board can be cleared." />
+  <meta name="theme-color" content="#0f1626" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/shared/calm.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <section id="screen-title" class="screen">
+    <div class="center">
+      <h1 class="logo">Light <span>Switch</span></h1>
+      <p class="tagline">Pressing a light flips it and the four around it. Turn every light off. Each board was made by pressing lights on a dark board, so each one can be cleared, and a hint will show you a press that helps.</p>
+      <div class="levels" id="levels"></div>
+      <div id="calm"></div>
+      <div class="foot"><a class="link" href="/">All games</a><button class="link" id="btn-reset">Reset progress</button></div>
+    </div>
+  </section>
+  <section id="screen-play" class="screen hidden">
+    <div class="center">
+      <div class="topbar">
+        <button class="icon-btn" id="btn-close" aria-label="Back">✕</button>
+        <div class="top-mid"><div class="top-title" id="play-title"></div><div class="top-sub" id="play-sub"></div></div>
+        <div class="top-right" id="play-right"></div>
+      </div>
+      <div class="board-wrap"><div class="board" id="board"></div></div>
+      <div class="chips" style="margin-top:10px">
+        <button class="chip" id="btn-hint">Hint</button>
+        <button class="chip" id="btn-restart">Restart</button>
+        <button class="chip" id="btn-new">New board</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  </section>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

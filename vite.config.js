@@ -31,6 +31,7 @@ export default defineConfig({
         'circuit-paths': page('games/circuit-paths/index.html'),
         'tangram-fit': page('games/tangram-fit/index.html'),
         'pattern-weaver': page('games/pattern-weaver/index.html'),
+        'light-switch': page('games/light-switch/index.html'),
         'odd-one-out': page('games/odd-one-out/index.html'),
         tuner: page('tools/tuner/index.html'),
       },
